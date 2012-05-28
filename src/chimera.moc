@@ -1,0 +1,225 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'chimera.h'
+**
+** Created: Sun May 27 23:00:55 2012
+**      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "chimera.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'chimera.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 63
+#error "This file was generated using the moc from 4.8.0. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_WebPage[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      14,    8,    9,    8, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_WebPage[] = {
+    "WebPage\0\0bool\0shouldInterruptJavaScript()\0"
+};
+
+void WebPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        WebPage *_t = static_cast<WebPage *>(_o);
+        switch (_id) {
+        case 0: { bool _r = _t->shouldInterruptJavaScript();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObjectExtraData WebPage::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject WebPage::staticMetaObject = {
+    { &QWebPage::staticMetaObject, qt_meta_stringdata_WebPage,
+      qt_meta_data_WebPage, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &WebPage::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *WebPage::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *WebPage::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_WebPage))
+        return static_cast<void*>(const_cast< WebPage*>(this));
+    return QWebPage::qt_metacast(_clname);
+}
+
+int WebPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QWebPage::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
+    return _id;
+}
+static const uint qt_meta_data_Chimera[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       7,   14, // methods
+       5,   49, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      14,    9,    8,    8, 0x0a,
+      24,    8,    8,    8, 0x2a,
+      39,   31,    8,    8, 0x0a,
+      67,   58,   53,    8, 0x0a,
+      86,   83,    8,    8, 0x0a,
+      97,    8,    8,    8, 0x08,
+     106,    8,    8,    8, 0x08,
+
+ // properties: name, type, flags
+     127,  119, 0x0a095103,
+     135,  119, 0x0a095001,
+     146,  119, 0x0a095103,
+     152,  119, 0x0a095103,
+     174,  162, 0x08095103,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_Chimera[] = {
+    "Chimera\0\0code\0exit(int)\0exit()\0address\0"
+    "open(QString)\0bool\0fileName\0render(QString)\0"
+    "ms\0sleep(int)\0inject()\0finish(bool)\0"
+    "QString\0content\0loadStatus\0state\0"
+    "userAgent\0QVariantMap\0viewportSize\0"
+};
+
+void Chimera::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        Chimera *_t = static_cast<Chimera *>(_o);
+        switch (_id) {
+        case 0: _t->exit((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->exit(); break;
+        case 2: _t->open((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 3: { bool _r = _t->render((*reinterpret_cast< const QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 4: _t->sleep((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->inject(); break;
+        case 6: _t->finish((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObjectExtraData Chimera::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject Chimera::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Chimera,
+      qt_meta_data_Chimera, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &Chimera::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *Chimera::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *Chimera::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_Chimera))
+        return static_cast<void*>(const_cast< Chimera*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int Chimera::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 7)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 7;
+    }
+#ifndef QT_NO_PROPERTIES
+      else if (_c == QMetaObject::ReadProperty) {
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: *reinterpret_cast< QString*>(_v) = content(); break;
+        case 1: *reinterpret_cast< QString*>(_v) = loadStatus(); break;
+        case 2: *reinterpret_cast< QString*>(_v) = state(); break;
+        case 3: *reinterpret_cast< QString*>(_v) = userAgent(); break;
+        case 4: *reinterpret_cast< QVariantMap*>(_v) = viewportSize(); break;
+        }
+        _id -= 5;
+    } else if (_c == QMetaObject::WriteProperty) {
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: setContent(*reinterpret_cast< QString*>(_v)); break;
+        case 2: setState(*reinterpret_cast< QString*>(_v)); break;
+        case 3: setUserAgent(*reinterpret_cast< QString*>(_v)); break;
+        case 4: setViewportSize(*reinterpret_cast< QVariantMap*>(_v)); break;
+        }
+        _id -= 5;
+    } else if (_c == QMetaObject::ResetProperty) {
+        _id -= 5;
+    } else if (_c == QMetaObject::QueryPropertyDesignable) {
+        _id -= 5;
+    } else if (_c == QMetaObject::QueryPropertyScriptable) {
+        _id -= 5;
+    } else if (_c == QMetaObject::QueryPropertyStored) {
+        _id -= 5;
+    } else if (_c == QMetaObject::QueryPropertyEditable) {
+        _id -= 5;
+    } else if (_c == QMetaObject::QueryPropertyUser) {
+        _id -= 5;
+    }
+#endif // QT_NO_PROPERTIES
+    return _id;
+}
+QT_END_MOC_NAMESPACE
