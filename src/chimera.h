@@ -3,6 +3,7 @@
 
 #include <QtGui>
 #include <QtWebKit>
+#include <QTimer>
 #include <iostream>
 
 class WebPage : public QWebPage {
@@ -34,10 +35,13 @@ class Chimera : public QObject {
 public:
     Chimera(QObject *parent = 0);
 
+    QString getResult();
+    QString getError();
+
     QString content() const;
     void setContent(const QString &content);
 
-    void execute(const QString &fileName);
+    void setEmbedScript(const QString &fileName);
     int returnValue() const;
 
     QString loadStatus() const;
@@ -51,20 +55,29 @@ public:
     void setViewportSize(const QVariantMap &size);
     QVariantMap viewportSize() const;
 
+    void wait();
+    void execute();
+    
+    void open(const QString &address);
+
 public slots:
     void exit(int code = 0);
-    void open(const QString &address);
     bool render(const QString &fileName);
     void sleep(int ms);
+    void callback(const QString &errorResult, const QString &result);
 
 private slots:
-    void inject();
     void finish(bool);
+    void inject();
 
 private:
     QString m_loadStatus;
     WebPage m_page;
     int m_returnValue;
+    QMutex m_mutex;
+    QWaitCondition m_loading;
+    QString m_result;
+    QString m_error;
     QString m_script;
     QString m_state;
 };

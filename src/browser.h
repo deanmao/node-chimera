@@ -3,13 +3,26 @@
 
 #include <node.h>
 #include <QApplication>
+#include <QTimer>
 #include "chimera.h"
+
+struct BWork {
+    uv_work_t request;
+    v8::Persistent<v8::Function> callback;
+    bool error;
+    std::string error_message;
+    QString result;
+    Chimera* chimera;
+    QString code;
+    QString url;
+    QString errorResult;
+};
 
 class Browser : public node::ObjectWrap {
  public:
   static void Initialize(v8::Handle<v8::Object> target);
-  QApplication* GetWrapped() const { return q_; };
-  Chimera* GetChimera() const { return chimera_; };
+  Chimera* getChimera() const { return chimera_; };
+  void setChimera(Chimera *chimera) { chimera_ = chimera; };
 
  private:
   Browser();
@@ -18,10 +31,9 @@ class Browser : public node::ObjectWrap {
   static v8::Handle<v8::Value> New(const v8::Arguments& args);
 
   // Wrapped methods
-  static v8::Handle<v8::Value> Exec(const v8::Arguments& args);
+  static v8::Handle<v8::Value> Open(const v8::Arguments& args);
 
   // Wrapped object
-  QApplication* q_;
   Chimera* chimera_;
   static int argc_;
   static char** argv_;

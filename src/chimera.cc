@@ -65,19 +65,17 @@ void Chimera::setContent(const QString &content)
     m_page.mainFrame()->setHtml(content);
 }
 
-void Chimera::execute(const QString &fileName)
+void Chimera::setEmbedScript(const QString &jscode)
 {
-    QFile file;
-    file.setFileName(fileName);
-    if (!file.open(QFile::ReadOnly)) {
-        std::cerr << "Can't open " << qPrintable(fileName) << std::endl << std::endl;
-        exit(1);
-        return;
-    }
-    m_script = file.readAll();
-    file.close();
+    m_script = jscode;
+}
 
-    m_page.mainFrame()->evaluateJavaScript(m_script);
+void Chimera::callback(const QString &errorResult, const QString &result)
+{
+  m_error = errorResult;
+  m_result = result;
+  m_mutex.unlock();
+  m_loading.wakeAll();
 }
 
 void Chimera::exit(int code)
@@ -85,6 +83,12 @@ void Chimera::exit(int code)
     m_returnValue = code;
     disconnect(&m_page, SIGNAL(loadFinished(bool)), this, SLOT(finish(bool)));
     QTimer::singleShot(0, qApp, SLOT(quit()));
+}
+
+void Chimera::execute()
+{
+    m_mutex.lock();
+    m_page.mainFrame()->evaluateJavaScript(m_script);
 }
 
 void Chimera::finish(bool success)
@@ -107,7 +111,19 @@ void Chimera::open(const QString &address)
 {
     m_page.triggerAction(QWebPage::Stop);
     m_loadStatus = "loading";
+    m_mutex.lock();
     m_page.mainFrame()->setUrl(address);
+}
+
+void Chimera::wait()
+{
+  if (m_mutex.tryLock()) {
+    m_mutex.unlock();
+  } else {
+    m_error = "";
+    m_result = "";
+    m_loading.wait(&m_mutex);
+  }
 }
 
 bool Chimera::render(const QString &fileName)
@@ -145,6 +161,16 @@ bool Chimera::render(const QString &fileName)
 int Chimera::returnValue() const
 {
     return m_returnValue;
+}
+
+QString Chimera::getResult()
+{
+    return m_result;
+}
+
+QString Chimera::getError()
+{
+    return m_error;
 }
 
 void Chimera::sleep(int ms)

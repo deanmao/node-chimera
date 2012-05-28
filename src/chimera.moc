@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'chimera.h'
 **
-** Created: Sun May 27 23:00:55 2012
+** Created: Mon May 28 16:22:43 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -107,28 +107,29 @@ static const uint qt_meta_data_Chimera[] = {
  // slots: signature, parameters, type, tag, flags
       14,    9,    8,    8, 0x0a,
       24,    8,    8,    8, 0x2a,
-      39,   31,    8,    8, 0x0a,
-      67,   58,   53,    8, 0x0a,
-      86,   83,    8,    8, 0x0a,
-      97,    8,    8,    8, 0x08,
-     106,    8,    8,    8, 0x08,
+      45,   36,   31,    8, 0x0a,
+      64,   61,    8,    8, 0x0a,
+      94,   75,    8,    8, 0x0a,
+     120,    8,    8,    8, 0x08,
+     133,    8,    8,    8, 0x08,
 
  // properties: name, type, flags
-     127,  119, 0x0a095103,
-     135,  119, 0x0a095001,
-     146,  119, 0x0a095103,
-     152,  119, 0x0a095103,
-     174,  162, 0x08095103,
+     150,  142, 0x0a095103,
+     158,  142, 0x0a095001,
+     169,  142, 0x0a095103,
+     175,  142, 0x0a095103,
+     197,  185, 0x08095103,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Chimera[] = {
-    "Chimera\0\0code\0exit(int)\0exit()\0address\0"
-    "open(QString)\0bool\0fileName\0render(QString)\0"
-    "ms\0sleep(int)\0inject()\0finish(bool)\0"
-    "QString\0content\0loadStatus\0state\0"
-    "userAgent\0QVariantMap\0viewportSize\0"
+    "Chimera\0\0code\0exit(int)\0exit()\0bool\0"
+    "fileName\0render(QString)\0ms\0sleep(int)\0"
+    "errorResult,result\0callback(QString,QString)\0"
+    "finish(bool)\0inject()\0QString\0content\0"
+    "loadStatus\0state\0userAgent\0QVariantMap\0"
+    "viewportSize\0"
 };
 
 void Chimera::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -139,12 +140,12 @@ void Chimera::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         switch (_id) {
         case 0: _t->exit((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->exit(); break;
-        case 2: _t->open((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: { bool _r = _t->render((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 2: { bool _r = _t->render((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 4: _t->sleep((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 5: _t->inject(); break;
-        case 6: _t->finish((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 3: _t->sleep((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->callback((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 5: _t->finish((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 6: _t->inject(); break;
         default: ;
         }
     }
