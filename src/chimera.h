@@ -14,6 +14,7 @@ public:
     
 public slots:
     bool shouldInterruptJavaScript();
+    void sendEvent(const QString &type, const QVariant &arg1 = QVariant(), const QVariant &arg2 = QVariant());
 
 protected:
     void javaScriptAlert(QWebFrame *originatingFrame, const QString &msg);
@@ -70,6 +71,7 @@ public:
 
 public slots:
     void callback(const QString &errorResult, const QString &result);
+    void sendEvent(const QString &type, const QVariant &arg1 = QVariant(), const QVariant &arg2 = QVariant());
 
 private slots:
     void finish(bool);

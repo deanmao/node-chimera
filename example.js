@@ -1,88 +1,84 @@
-var webkit = require('./lib/main');
-var Chimera = webkit.Chimera;
-var fs = require('fs');
+var Chimera = require('./lib/main').Chimera;
 
-var jquerySrc = fs.readFileSync("jquery.js");
-
-function sendEmail(address, subject, content, cookies) {
-  console.log("Going to send some email...");
-  var c2 = new Chimera({
-    libraryCode: jquerySrc,
-    cookies: cookies
+(function() {
+  var c = new Chimera({
+    cookies: ""
   });
-  c2.perform({
-    url: "https://mail.google.com/mail/u/0/#compose",
+  c.perform({
+    url: "http://digg.com",
     locals: {
-      address: address,
-      subject: subject,
-      content: content
+      username: "john01sample",
+      password: "newsample"
     },
     run: function(callback) {
       setTimeout(function() {
-        jQuery(document.getElementById(':zz')).val(address);
-        jQuery(document.getElementById(':yk')).val(subject);
-        jQuery(document.getElementById(':10n')).text(content);
-        callback(null, jQuery(document.getElementById(':10n')).text());
-        jQuery(document.getElementById(':za')).click();
+        // Digg prompts new visitors with a modal greeting dialog
+        if (jQuery('a.modal-close-inline').length > 0) {
+          jQuery('a.modal-close-inline').click();
+          // Click the login button via jquery
+          jQuery('#modal-login').click();
+          // We have to set a timeout because it takes some time for
+          // the login dialog to animate in
+          setTimeout(function() {
+            jQuery('#ident').val(username);
+            jQuery('#password').val(password);
+            var pos = jQuery('#login-button').offset();
+            // Click the submit button using a native mouse cursor
+            chimera.sendEvent("click", pos.left + 10, pos.top + 10);
+          }, 500);
+        } else {
+          // If we don't see the modal greeting dialog, that means
+          // we are on the page after login.  We will now make the
+          // call to put us back into nodejs
+          setTimeout(function() {
+            callback(null, "success");
+          }, 1000);
+        }
       }, 1000);
     },
     callback: function(err, result) {
-      console.log('==================================');
-      console.log('sending using body text: ' + result);
-      console.log("c2 cookies are:");
-      console.log(c2.cookies());
+      console.log('capture screen shot');
+      c.capture("screenshot.png");
+      var cookies = c.cookies();
+      c.close();
+      
+      // Create a new browser session with cookies from the logged in
+      // Digg account
+      var c2 = new Chimera({
+        cookies: cookies
+      });
+      c2.perform({
+        url: "http://digg.com",
+        run: function(callback) {
+          setTimeout(function() {
+            callback(null, "success");
+          }, 1000);
+        },
+        callback: function(err, result) {
+          console.log('capture screen shot that shows we are logged in');
+          c2.capture("screenshot_logged_in.png");
+          c2.close();
+        }
+      });
+      
+      // Create a new browser session without any cookies to show that
+      // we can still be incognito if we want to be.
+      var c3 = new Chimera({
+        cookies: ""
+      });
+      c3.perform({
+        url: "http://digg.com",
+        run: function(callback) {
+          setTimeout(function() {
+            callback(null, "success");
+          }, 1000);
+        },
+        callback: function(err, result) {
+          console.log('capture screen shot that shows we are not logged in');
+          c3.capture("screenshot_not_logged_in.png");
+          c3.close();
+        }
+      });
     }
   });
-}
-
-for(var i=0; i<1; i++) {
-  (function() {
-    var index = i;
-    var c = new Chimera({
-      userAgent: "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6",
-      libraryCode: jquerySrc,
-      cookies: ""
-    });
-    c.perform({
-      url: "http://gmail.com",
-      locals: {
-        username: "asdf",
-        password: "asdf"
-      },
-      run: function(callback) {
-        jQuery.noConflict();
-        jQuery('#Email').val(username);
-        jQuery('#Passwd').val(password);
-        document.getElementById('signIn').click();
-        callback("", document.cookie);
-      },
-      callback: function(err, result) {
-        // console.log('==================================');
-        // console.log("document.cookie: " + result);
-    
-        c.perform({
-          run: function(callback) {
-            setTimeout(function() {
-              callback(null, document.cookie);
-            }, 2000);
-          },
-          callback: function(err, result) {
-            // console.log('==================================');
-            // console.log("final document.cookie: " + result);
-            c.capture("output-"+index+".png");
-            console.log('----------------------------------');
-            console.log("final cookies: " + c.cookies())
-            console.log('----------------------------------');
-        
-            setTimeout(function() {
-              console.log('closing out...');
-              c.close();
-            }, 1000);
-        
-            // sendEmail("deanmao@gmail.com", "my subject", "hello, how are you today?", c.cookies());
-          }
-        });
-      }
-    });
-  })();
-}
+})();

@@ -31,6 +31,39 @@ QString WebPage::userAgentForUrl(const QUrl &url) const
     return m_userAgent;
 }
 
+void WebPage::sendEvent(const QString &type, const QVariant &arg1, const QVariant &arg2)
+{
+    if (type == "mousedown" ||  type == "mouseup" || type == "mousemove") {
+        QMouseEvent::Type eventType = QEvent::None;
+        Qt::MouseButton button = Qt::LeftButton;
+        Qt::MouseButtons buttons = Qt::LeftButton;
+
+        if (type == "mousedown")
+            eventType = QEvent::MouseButtonPress;
+        if (type == "mouseup")
+            eventType = QEvent::MouseButtonRelease;
+        if (type == "mousemove") {
+            eventType = QEvent::MouseMove;
+            button = Qt::NoButton;
+            buttons = Qt::NoButton;
+        }
+        Q_ASSERT(eventType != QEvent::None);
+
+        int x = arg1.toInt();
+        int y = arg2.toInt();
+        QMouseEvent *event = new QMouseEvent(eventType, QPoint(x, y), button, buttons, Qt::NoModifier);
+        QApplication::postEvent(this, event);
+        QApplication::processEvents();
+        return;
+    }
+
+    if (type == "click") {
+        sendEvent("mousedown", arg1, arg2);
+        sendEvent("mouseup", arg1, arg2);
+        return;
+    }
+}
+
 Chimera::Chimera(QObject *parent)
     : QObject(parent)
     , m_returnValue(0)
@@ -51,6 +84,7 @@ Chimera::Chimera(QObject *parent)
     m_page.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
     m_page.settings()->setLocalStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
     m_page.settings()->setOfflineStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
+    m_page.setViewportSize(QSize(1024, 768));
 
     // Ensure we have document.body.
     m_page.mainFrame()->setHtml("<html><body></body></html>");
@@ -76,7 +110,6 @@ void Chimera::setLibraryCode(const QString &content)
 
 void Chimera::setCookies(const QString &content)
 {
-  qDebug() << "setting cookies: " << content;
   m_jar.setCookies(content);
 }
 
@@ -96,6 +129,11 @@ void Chimera::callback(const QString &errorResult, const QString &result)
   m_result = result;
   m_mutex.unlock();
   m_loading.wakeAll();
+}
+
+void Chimera::sendEvent(const QString &type, const QVariant &arg1, const QVariant &arg2)
+{
+  m_page.sendEvent(type, arg1, arg2);
 }
 
 void Chimera::exit(int code)

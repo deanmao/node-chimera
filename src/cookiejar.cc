@@ -11,7 +11,7 @@ QString CookieJar::getCookies()
   QString cookies = "";
   
   for (QList<QNetworkCookie>::const_iterator i = cookieList.begin(); i != cookieList.end(); i++) {
-      cookies = cookies + (*i).toRawForm() + ", ";
+      cookies = cookies + (*i).toRawForm() + "\n";
   }
 
   return cookies;
