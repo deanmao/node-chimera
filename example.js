@@ -1,13 +1,14 @@
 var Chimera = require('./lib/main').Chimera;
 
-var c = new Chimera({
-  cookies: ""
-});
+var myUsername = "john01sample";
+var myPassword = "newsample";
+
+var c = new Chimera();
 c.perform({
   url: "http://digg.com",
   locals: {
-    username: "john01sample",
-    password: "newsample"
+    username: myUsername,
+    password: myPassword
   },
   run: function(callback) {
     setTimeout(function() {
@@ -62,9 +63,7 @@ c.perform({
     
     // Create a new browser session without any cookies to show that
     // we can still be incognito if we want to be.
-    var c3 = new Chimera({
-      cookies: ""
-    });
+    var c3 = new Chimera();
     c3.perform({
       url: "http://digg.com",
       run: function(callback) {
