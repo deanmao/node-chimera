@@ -39,7 +39,9 @@ for(var i=0; i<1; i++) {
   (function() {
     var index = i;
     var c = new Chimera({
-      libraryCode: jquerySrc
+      userAgent: "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6",
+      libraryCode: jquerySrc,
+      cookies: ""
     });
     c.perform({
       url: "http://gmail.com",
