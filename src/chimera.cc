@@ -38,10 +38,12 @@ Chimera::Chimera(QObject *parent)
     QPalette palette = m_page.palette();
     palette.setBrush(QPalette::Base, Qt::transparent);
     m_page.setPalette(palette);
+    m_page.setParent(this);
 
     connect(m_page.mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), SLOT(inject()));
     connect(&m_page, SIGNAL(loadFinished(bool)), this, SLOT(finish(bool)));
 
+    m_jar.setParent(this);
     m_page.networkAccessManager()->setCookieJar(&m_jar);
     
     m_page.settings()->setAttribute(QWebSettings::FrameFlatteningEnabled, true);
@@ -74,6 +76,7 @@ void Chimera::setLibraryCode(const QString &content)
 
 void Chimera::setCookies(const QString &content)
 {
+  qDebug() << "setting cookies: " << content;
   m_jar.setCookies(content);
 }
 
@@ -97,9 +100,9 @@ void Chimera::callback(const QString &errorResult, const QString &result)
 
 void Chimera::exit(int code)
 {
+    m_page.triggerAction(QWebPage::Stop);
     m_returnValue = code;
     disconnect(&m_page, SIGNAL(loadFinished(bool)), this, SLOT(finish(bool)));
-    QTimer::singleShot(0, qApp, SLOT(quit()));
 }
 
 void Chimera::execute()

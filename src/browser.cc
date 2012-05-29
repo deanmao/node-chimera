@@ -23,6 +23,7 @@ void Browser::Initialize(Handle<Object> target) {
   tpl->InstanceTemplate()->SetInternalFieldCount(1);  
 
   tpl->PrototypeTemplate()->Set(String::NewSymbol("open"), FunctionTemplate::New(Open)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("close"), FunctionTemplate::New(Close)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("cookies"), FunctionTemplate::New(Cookies)->GetFunction());
 
   constructor = Persistent<Function>::New(
@@ -96,7 +97,20 @@ Handle<Value> Browser::Cookies(const Arguments& args) {
   return scope.Close(top_v8::FromQString(cookies));
 }
   
-
+Handle<Value> Browser::Close(const Arguments& args) {
+  HandleScope scope;
+  
+  Browser* w = ObjectWrap::Unwrap<Browser>(args.This());
+  Chimera* chimera = w->getChimera();
+ 
+  if (0 != chimera) {
+    chimera->exit(1);
+    w->setChimera(0);
+    chimera->deleteLater();
+  }
+ 
+  return scope.Close(Undefined());
+}
 
 Handle<Value> Browser::Open(const Arguments& args) {
   HandleScope scope;

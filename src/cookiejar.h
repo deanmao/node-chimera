@@ -2,6 +2,7 @@
 #define COOKIEJAR_H
 
 #include <QNetworkCookieJar>
+#include <iostream>
 
 class CookieJar: public QNetworkCookieJar
 {
