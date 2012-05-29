@@ -5,6 +5,7 @@
       'type': '<(library)',
       'sources': [
         'src/top.cc', 
+        'src/cookiejar.cc', 
         'src/chimera.cc', 
         'src/browser.cc'
       ],
@@ -14,6 +15,7 @@
             'deps/qt-4.8.0/darwin/x64/include',
             'deps/qt-4.8.0/darwin/x64/include/QtCore',
             'deps/qt-4.8.0/darwin/x64/include/QtGui',
+            'deps/qt-4.8.0/darwin/x64/include/QtNetwork',
             'deps/qt-4.8.0/darwin/x64/include/QtWebkit'
           ],
           'libraries': [

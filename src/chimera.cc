@@ -42,6 +42,8 @@ Chimera::Chimera(QObject *parent)
     connect(m_page.mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), SLOT(inject()));
     connect(&m_page, SIGNAL(loadFinished(bool)), this, SLOT(finish(bool)));
 
+    m_page.networkAccessManager()->setCookieJar(&m_jar);
+    
     m_page.settings()->setAttribute(QWebSettings::FrameFlatteningEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
@@ -63,6 +65,21 @@ QString Chimera::content() const
 void Chimera::setContent(const QString &content)
 {
     m_page.mainFrame()->setHtml(content);
+}
+
+void Chimera::setLibraryCode(const QString &content)
+{
+  m_libraryCode = content;
+}
+
+void Chimera::setCookies(const QString &content)
+{
+  m_jar.setCookies(content);
+}
+
+QString Chimera::getCookies()
+{
+  return m_jar.getCookies();
 }
 
 void Chimera::setEmbedScript(const QString &jscode)
@@ -94,6 +111,7 @@ void Chimera::execute()
 void Chimera::finish(bool success)
 {
     m_loadStatus = success ? "success" : "fail";
+    m_page.mainFrame()->evaluateJavaScript(m_libraryCode);
     m_page.mainFrame()->evaluateJavaScript(m_script);
 }
 

@@ -24,17 +24,22 @@ class Browser : public node::ObjectWrap {
   Chimera* getChimera() const { return chimera_; };
   void setChimera(Chimera *chimera) { chimera_ = chimera; };
 
+  QString userAgent() {return userAgent_; };
+  QString libraryCode() {return libraryCode_; };
+  QString cookies() {return cookies_; };
+
  private:
-  Browser();
+  Browser(QString userAgent, QString libraryCode, QString cookies);
   ~Browser();
   static v8::Persistent<v8::Function> constructor;
   static v8::Handle<v8::Value> New(const v8::Arguments& args);
-
-  // Wrapped methods
   static v8::Handle<v8::Value> Open(const v8::Arguments& args);
+  static v8::Handle<v8::Value> Cookies(const v8::Arguments& args);
 
-  // Wrapped object
   Chimera* chimera_;
+  QString libraryCode_;
+  QString userAgent_;
+  QString cookies_;
   static int argc_;
   static char** argv_;
 };

@@ -7,10 +7,14 @@ using namespace v8;
 
 Persistent<Function> Browser::constructor;
 
-Browser::Browser() {
+Browser::Browser(QString userAgent, QString libraryCode, QString cookies) {
+  userAgent_ = userAgent;
+  libraryCode_ = libraryCode;
+  cookies_ = cookies;
   chimera_ = 0;
 }
 Browser::~Browser() {
+  delete chimera_;
 }
 
 void Browser::Initialize(Handle<Object> target) {
@@ -19,6 +23,7 @@ void Browser::Initialize(Handle<Object> target) {
   tpl->InstanceTemplate()->SetInternalFieldCount(1);  
 
   tpl->PrototypeTemplate()->Set(String::NewSymbol("open"), FunctionTemplate::New(Open)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("cookies"), FunctionTemplate::New(Cookies)->GetFunction());
 
   constructor = Persistent<Function>::New(
       tpl->GetFunction());
@@ -28,7 +33,10 @@ void Browser::Initialize(Handle<Object> target) {
 Handle<Value> Browser::New(const Arguments& args) {
   HandleScope scope;
 
-  Browser* w = new Browser();
+  QString userAgent = top_v8::ToQString(args[0]->ToString());
+  QString libraryCode = top_v8::ToQString(args[1]->ToString());
+  QString cookies = top_v8::ToQString(args[2]->ToString());
+  Browser* w = new Browser(userAgent, libraryCode, cookies);
   w->Wrap(args.This());
 
   return args.This();
@@ -74,6 +82,22 @@ void AsyncAfter(uv_work_t* req) {
     delete work;
 }
 
+Handle<Value> Browser::Cookies(const Arguments& args) {
+  HandleScope scope;
+
+  QString cookies = "";
+  Browser* w = ObjectWrap::Unwrap<Browser>(args.This());
+  Chimera* chimera = w->getChimera();
+
+  if (0 != chimera) {
+    cookies = chimera->getCookies();
+  }
+  
+  return scope.Close(top_v8::FromQString(cookies));
+}
+  
+
+
 Handle<Value> Browser::Open(const Arguments& args) {
   HandleScope scope;
   
@@ -101,6 +125,9 @@ Handle<Value> Browser::Open(const Arguments& args) {
     work->chimera = chimera;
   } else {
     work->chimera = new Chimera();
+    work->chimera->setUserAgent(w->userAgent());
+    work->chimera->setLibraryCode(w->libraryCode());
+    work->chimera->setCookies(w->cookies());
     w->setChimera(work->chimera);
   }
 

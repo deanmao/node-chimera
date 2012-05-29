@@ -5,12 +5,13 @@
 #include <QtWebKit>
 #include <QTimer>
 #include <iostream>
+#include "cookiejar.h"
 
 class WebPage : public QWebPage {
     Q_OBJECT
 public:
     WebPage(QObject *parent = 0);
-
+    
 public slots:
     bool shouldInterruptJavaScript();
 
@@ -20,6 +21,7 @@ protected:
     QString userAgentForUrl(const QUrl &url) const;
 
 private:
+    QString m_cookies;
     QString m_userAgent;
     friend class Chimera;
 };
@@ -40,6 +42,10 @@ public:
 
     QString content() const;
     void setContent(const QString &content);
+
+    void setLibraryCode(const QString &content);
+    void setCookies(const QString &content);
+    QString getCookies();
 
     void setEmbedScript(const QString &fileName);
     int returnValue() const;
@@ -73,11 +79,13 @@ private slots:
 private:
     QString m_loadStatus;
     WebPage m_page;
+    CookieJar m_jar;
     int m_returnValue;
     QMutex m_mutex;
     QWaitCondition m_loading;
     QString m_result;
     QString m_error;
+    QString m_libraryCode;
     QString m_script;
     QString m_state;
 };
