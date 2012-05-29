@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'chimera.h'
 **
-** Created: Mon May 28 21:12:51 2012
+** Created: Tue May 29 04:42:15 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -97,35 +97,31 @@ static const uint qt_meta_data_Chimera[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
-       5,   49, // properties
+       4,   14, // methods
+       5,   34, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      14,    9,    8,    8, 0x0a,
-      24,    8,    8,    8, 0x2a,
-      45,   36,   31,    8, 0x0a,
-      64,   61,    8,    8, 0x0a,
-      94,   75,    8,    8, 0x0a,
-     120,    8,    8,    8, 0x08,
-     133,    8,    8,    8, 0x08,
+      23,   14,    9,    8, 0x0a,
+      58,   39,    8,    8, 0x0a,
+      84,    8,    8,    8, 0x08,
+      97,    8,    8,    8, 0x08,
 
  // properties: name, type, flags
-     150,  142, 0x0a095103,
-     158,  142, 0x0a095001,
-     169,  142, 0x0a095103,
-     175,  142, 0x0a095103,
-     197,  185, 0x08095103,
+     114,  106, 0x0a095103,
+     122,  106, 0x0a095001,
+     133,  106, 0x0a095103,
+     139,  106, 0x0a095103,
+     161,  149, 0x08095103,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Chimera[] = {
-    "Chimera\0\0code\0exit(int)\0exit()\0bool\0"
-    "fileName\0render(QString)\0ms\0sleep(int)\0"
+    "Chimera\0\0bool\0fileName\0render(QString)\0"
     "errorResult,result\0callback(QString,QString)\0"
     "finish(bool)\0inject()\0QString\0content\0"
     "loadStatus\0state\0userAgent\0QVariantMap\0"
@@ -138,14 +134,11 @@ void Chimera::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         Q_ASSERT(staticMetaObject.cast(_o));
         Chimera *_t = static_cast<Chimera *>(_o);
         switch (_id) {
-        case 0: _t->exit((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 1: _t->exit(); break;
-        case 2: { bool _r = _t->render((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 0: { bool _r = _t->render((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 3: _t->sleep((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->callback((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
-        case 5: _t->finish((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 6: _t->inject(); break;
+        case 1: _t->callback((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 2: _t->finish((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 3: _t->inject(); break;
         default: ;
         }
     }
@@ -183,9 +176,9 @@ int Chimera::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 4;
     }
 #ifndef QT_NO_PROPERTIES
       else if (_c == QMetaObject::ReadProperty) {

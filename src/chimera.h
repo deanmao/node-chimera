@@ -65,11 +65,10 @@ public:
     void execute();
     
     void open(const QString &address);
+    void exit(int code = 0);
 
 public slots:
-    void exit(int code = 0);
     bool render(const QString &fileName);
-    void sleep(int ms);
     void callback(const QString &errorResult, const QString &result);
 
 private slots:

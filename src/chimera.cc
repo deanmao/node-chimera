@@ -194,15 +194,15 @@ QString Chimera::getError()
     return m_error;
 }
 
-void Chimera::sleep(int ms)
-{
-    QTime startTime = QTime::currentTime();
-    while (true) {
-        QApplication::processEvents(QEventLoop::AllEvents, 25);
-        if (startTime.msecsTo(QTime::currentTime()) > ms)
-            break;
-    }
-}
+// void Chimera::sleep(int ms)
+// {
+//     QTime startTime = QTime::currentTime();
+//     while (true) {
+//         QApplication::processEvents(QEventLoop::AllEvents, 25);
+//         if (startTime.msecsTo(QTime::currentTime()) > ms)
+//             break;
+//     }
+// }
 
 void Chimera::setState(const QString &value)
 {

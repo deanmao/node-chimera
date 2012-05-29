@@ -36,8 +36,7 @@ function sendEmail(address, subject, content, cookies) {
   });
 }
 
-webkit.stop();
-for(var i=0; i<5; i++) {
+for(var i=0; i<20; i++) {
   (function() {
     var index = i;
     var c = new Chimera({
@@ -46,14 +45,14 @@ for(var i=0; i<5; i++) {
     c.perform({
       url: "http://gmail.com",
       locals: {
-        username: "john01sample",
-        password: "newsample1"
+        username: "asdf",
+        password: "asdf"
       },
       run: function(callback) {
         jQuery.noConflict();
         jQuery('#Email').val(username);
         jQuery('#Passwd').val(password);
-        jQuery('#signIn').click();
+        document.getElementById('signIn').click();
         callback("", document.cookie);
       },
       callback: function(err, result) {
@@ -68,7 +67,7 @@ for(var i=0; i<5; i++) {
             setTimeout(function() {
               chimera.render(filename);
               callback(null, document.cookie);
-            }, 1000);
+            }, 2000);
           },
           callback: function(err, result) {
             // console.log('==================================');
