@@ -24,6 +24,7 @@ void Browser::Initialize(Handle<Object> target) {
 
   tpl->PrototypeTemplate()->Set(String::NewSymbol("open"), FunctionTemplate::New(Open)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("close"), FunctionTemplate::New(Close)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("capture"), FunctionTemplate::New(Capture)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("cookies"), FunctionTemplate::New(Cookies)->GetFunction());
 
   constructor = Persistent<Function>::New(
@@ -95,6 +96,24 @@ Handle<Value> Browser::Cookies(const Arguments& args) {
   }
   
   return scope.Close(top_v8::FromQString(cookies));
+}
+
+Handle<Value> Browser::Capture(const Arguments& args) {
+  HandleScope scope;
+  
+  if (!args[0]->IsString()) {
+      return ThrowException(Exception::TypeError(
+          String::New("First argument must be a filename string")));
+  }
+  
+  Browser* w = ObjectWrap::Unwrap<Browser>(args.This());
+  Chimera* chimera = w->getChimera();
+ 
+  if (0 != chimera) {
+    chimera->render(top_v8::ToQString(args[0]->ToString()));
+  }
+ 
+  return scope.Close(Undefined());
 }
   
 Handle<Value> Browser::Close(const Arguments& args) {

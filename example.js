@@ -22,7 +22,6 @@ function sendEmail(address, subject, content, cookies) {
         jQuery(document.getElementById(':zz')).val(address);
         jQuery(document.getElementById(':yk')).val(subject);
         jQuery(document.getElementById(':10n')).text(content);
-        window.chimera.render("output.png");
         callback(null, jQuery(document.getElementById(':10n')).text());
         jQuery(document.getElementById(':za')).click();
       }, 1000);
@@ -36,7 +35,7 @@ function sendEmail(address, subject, content, cookies) {
   });
 }
 
-for(var i=0; i<20; i++) {
+for(var i=0; i<1; i++) {
   (function() {
     var index = i;
     var c = new Chimera({
@@ -60,18 +59,15 @@ for(var i=0; i<20; i++) {
         // console.log("document.cookie: " + result);
     
         c.perform({
-          locals: {
-            filename: "output"+index+".png"
-          },
           run: function(callback) {
             setTimeout(function() {
-              chimera.render(filename);
               callback(null, document.cookie);
             }, 2000);
           },
           callback: function(err, result) {
             // console.log('==================================');
             // console.log("final document.cookie: " + result);
+            c.capture("output-"+index+".png");
             console.log('----------------------------------');
             console.log("final cookies: " + c.cookies())
             console.log('----------------------------------');

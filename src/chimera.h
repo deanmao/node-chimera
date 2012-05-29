@@ -66,9 +66,9 @@ public:
     
     void open(const QString &address);
     void exit(int code = 0);
+    bool render(const QString &fileName);
 
 public slots:
-    bool render(const QString &fileName);
     void callback(const QString &errorResult, const QString &result);
 
 private slots:
