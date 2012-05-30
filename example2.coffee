@@ -3,6 +3,8 @@ Chimera = require('./lib/main').Chimera
 myUsername = "john01sample"
 myPassword = "newsample"
 
+console.log('asdf')
+
 c = new Chimera()
 c.perform
   url: "http://digg.com"

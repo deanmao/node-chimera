@@ -15,8 +15,8 @@ void WebPage::javaScriptAlert(QWebFrame *originatingFrame, const QString &msg)
 void WebPage::javaScriptConsoleMessage(const QString &message, int lineNumber, const QString &sourceID)
 {
     if (!sourceID.isEmpty())
-        std::cout << qPrintable(sourceID) << ":" << lineNumber << " ";
-    std::cout << qPrintable(message) << std::endl;
+        std::cout << "webkit -- " << qPrintable(sourceID) << ":" << lineNumber << " " << std::endl;
+    std::cout << "webkit -- "  << qPrintable(message) << std::endl;
 }
 
 bool WebPage::shouldInterruptJavaScript()
