@@ -40,6 +40,7 @@ public:
 
     QString getResult();
     QString getError();
+    void disableImages();
 
     QString content() const;
     void setContent(const QString &content);

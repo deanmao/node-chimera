@@ -29,7 +29,7 @@ class Browser : public node::ObjectWrap {
   QString cookies() {return cookies_; };
 
  private:
-  Browser(QString userAgent, QString libraryCode, QString cookies);
+  Browser(QString userAgent, QString libraryCode, QString cookies, bool disableImages);
   ~Browser();
   static v8::Persistent<v8::Function> constructor;
   static v8::Handle<v8::Value> New(const v8::Arguments& args);
@@ -43,6 +43,7 @@ class Browser : public node::ObjectWrap {
   QString libraryCode_;
   QString userAgent_;
   QString cookies_;
+  bool disableImages_;
   static int argc_;
   static char** argv_;
 };

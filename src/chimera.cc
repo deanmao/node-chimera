@@ -79,6 +79,7 @@ Chimera::Chimera(QObject *parent)
     m_jar.setParent(this);
     m_page.networkAccessManager()->setCookieJar(&m_jar);
     
+    m_page.settings()->setMaximumPagesInCache(3);
     m_page.settings()->setAttribute(QWebSettings::FrameFlatteningEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
@@ -96,6 +97,11 @@ Chimera::Chimera(QObject *parent)
 QString Chimera::content() const
 {
     return m_page.mainFrame()->toHtml();
+}
+
+void Chimera::disableImages()
+{
+  m_page.settings()->setAttribute(QWebSettings::AutoLoadImages, false);
 }
 
 void Chimera::setContent(const QString &content)

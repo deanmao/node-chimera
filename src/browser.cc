@@ -7,10 +7,11 @@ using namespace v8;
 
 Persistent<Function> Browser::constructor;
 
-Browser::Browser(QString userAgent, QString libraryCode, QString cookies) {
+Browser::Browser(QString userAgent, QString libraryCode, QString cookies, bool disableImages) {
   userAgent_ = userAgent;
   libraryCode_ = libraryCode;
   cookies_ = cookies;
+  disableImages_ = disableImages;
   chimera_ = 0;
 }
 Browser::~Browser() {
@@ -39,7 +40,8 @@ Handle<Value> Browser::New(const Arguments& args) {
   QString userAgent = top_v8::ToQString(args[0]->ToString());
   QString libraryCode = top_v8::ToQString(args[1]->ToString());
   QString cookies = top_v8::ToQString(args[2]->ToString());
-  Browser* w = new Browser(userAgent, libraryCode, cookies);
+  bool disableImages = args[3]->BooleanValue();
+  Browser* w = new Browser(userAgent, libraryCode, cookies, disableImages);
   w->Wrap(args.This());
 
   return args.This();
@@ -182,6 +184,9 @@ Handle<Value> Browser::Open(const Arguments& args) {
     work->chimera->setUserAgent(w->userAgent());
     work->chimera->setLibraryCode(w->libraryCode());
     work->chimera->setCookies(w->cookies());
+    if (w->disableImages_) {
+      work->chimera->disableImages();
+    }
     w->setChimera(work->chimera);
   }
 
