@@ -11,6 +11,8 @@ pids
 logs
 results
 
+build
+moc
 .DS_Store
 node_modules
 npm-debug.log
