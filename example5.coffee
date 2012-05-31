@@ -22,17 +22,16 @@ imp_id=591dc5c792bac4a781a512be155c0dc2b01e7547482b2aaa45055e0be7d5147c; expires
 session_id=94d4d4bca3da9f7dc916e16c49363a9c5fd026178ead6cb35747471c994da8c3; expires=Wed, 30-May-2012 02:24:27 GMT; domain=.digg.com; path=/
 """
 
-c = new Chimera(disableImages: true)
-c.perform
-  url: "http://google.com"
-  run: (callback) ->
-    callback(null, "success")
-  callback: (err, result) ->
-    startTime = Date.now()
-    c.setCookies(cookies);
+done = 0
+count = 30
+for i in [1..count]
+  do ->
+    c = new Chimera(cookies: cookies, disableImages: true)
     c.perform
       url: "http://digg.com"
       run: (callback) ->
         callback(null, "success")
       callback: (err, result) ->
-        console.log(Date.now() - startTime)
+        done = done + 1
+        if done == count
+          process.exit()

@@ -1,16 +1,10 @@
 {
   "name": "node-chimera",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "private": true,
   "main": "./lib/main.js",
   "engines": {
     "node": ">= 0.6.17"
-  },
-  "dependencies": {
-    "shelljs": "0.0.5pre4"
-  },
-  "scripts": {
-    "install": "node-gyp rebuild"
   },
   "devDependencies": {},
   "optionalDependencies": {}
