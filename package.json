@@ -2,10 +2,10 @@
   "name": "chimera",
   "author": "Dean Mao <deanmao@gmail.com>",
   "description": "chimera",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "main": "./lib/main.js",
   "engines": {
-    "node": ">= 0.8"
+    "node": ">= 0.6"
   },
   "repository": {
     "type": "git",
