@@ -151,8 +151,11 @@ void Chimera::exit(int code)
 
 void Chimera::execute()
 {
-    m_mutex.lock();
+    std::cout << "debug -- about to lock" << std::endl;
+    m_mutex.tryLock();
+    std::cout << "debug -- about to evaluate" << std::endl;
     m_page.mainFrame()->evaluateJavaScript(m_script);
+    std::cout << "debug -- done evaluating" << std::endl;
 }
 
 void Chimera::finish(bool success)
@@ -177,7 +180,7 @@ void Chimera::open(const QString &address)
     m_page.triggerAction(QWebPage::Stop);
     m_loadStatus = "loading";
     m_mutex.lock();
-    m_page.mainFrame()->setUrl(address);
+    m_page.mainFrame()->setUrl(QUrl(address));
 }
 
 void Chimera::wait()

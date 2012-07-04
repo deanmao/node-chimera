@@ -196,6 +196,7 @@ Handle<Value> Browser::Open(const Arguments& args) {
     work->url = top_v8::ToQString(args[0]->ToString());
     work->chimera->open(work->url);
   } else {
+    std::cout << "debug -- about to call execute" << std::endl;
     work->chimera->execute();
   }
 

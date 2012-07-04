@@ -4,9 +4,9 @@
       'target_name': 'chimera',
       'type': '<(library)',
       'sources': [
-        'src/top.cc', 
-        'src/cookiejar.cc', 
-        'src/chimera.cc', 
+        'src/top.cc',
+        'src/cookiejar.cc',
+        'src/chimera.cc',
         'src/browser.cc'
       ],
       'conditions': [
@@ -35,17 +35,18 @@
             'deps/qt-4.8.0/linux/include/QtCore',
             'deps/qt-4.8.0/linux/include/QtGui',
             'deps/qt-4.8.0/linux/include/QtNetwork',
-            'deps/qt-4.8.0/linux/include/QtWebkit'
+            'deps/qt-4.8.0/linux/include/QtWebKit'
           ],
           'libraries': [
-            '-framework AppKit',
-            '../deps/qt-4.8.0/linux/lib/libQtGui.a',
-            '../deps/qt-4.8.0/linux/lib/libQtCore.a',
-            '../deps/qt-4.8.0/linux/lib/libQtNetwork.a',
-            '../deps/qt-4.8.0/linux/lib/libQtWebKit.a',
-            '../deps/qt-4.8.0/linux/lib/libjscore.a',
-            '../deps/qt-4.8.0/linux/lib/libwebcore.a',
-            '../deps/qt-4.8.0/linux/lib/libQtXml.a'
+            '../deps/openssl/linux/lib/libssl.a',
+            '../deps/openssl/linux/lib/libcrypto.a',
+            '../deps/qt-4.8.0/linux/lib-v0.8/libQtCore.a',
+            '../deps/qt-4.8.0/linux/lib-v0.8/libQtGui.a',
+            '../deps/qt-4.8.0/linux/lib-v0.8/libQtXml.a',
+            '../deps/qt-4.8.0/linux/lib-v0.8/libQtNetwork.a',
+            '../deps/qt-4.8.0/linux/lib-v0.8/libQtWebKit.a',
+            '../deps/qt-4.8.0/linux/lib-v0.8/libwebcore.a',
+            '../deps/qt-4.8.0/linux/lib-v0.8/libjscore.a'
           ],
         }]
       ]

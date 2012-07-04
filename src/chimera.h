@@ -68,9 +68,9 @@ public:
     
     void open(const QString &address);
     void exit(int code = 0);
-    bool render(const QString &fileName);
 
 public slots:
+    bool render(const QString &fileName);
     void callback(const QString &errorResult, const QString &result);
     void sendEvent(const QString &type, const QVariant &arg1 = QVariant(), const QVariant &arg2 = QVariant());
 
