@@ -1,11 +1,12 @@
 {
-  "name": "node-chimera",
-  "version": "0.0.1",
-  "private": true,
+  "name": "chimera",
+  "version": "0.2.0",
   "main": "./lib/main.js",
   "engines": {
-    "node": ">= 0.6.17"
+    "node": ">= 0.8"
   },
-  "devDependencies": {},
-  "optionalDependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/deanmao/node-chimera.git"
+  }
 }
