@@ -48,7 +48,7 @@ type of code to wait for the page to fully load.  Keep in mind that the run func
 so you won't have access to any scoped variables in nodejs.  The `callback` parameter should be called when you're
 ready to pause the browser instance and pass control back to the nodejs world.
 
-The 'callback' function is run in the nodejs context so you'll have access to scoped variables as usual.  This 
+The `callback` function is run in the nodejs context so you'll have access to scoped variables as usual.  This 
 function is called when you call the callback function from inside of `run()`.
 
 ## Chimera options
@@ -62,10 +62,10 @@ function is called when you call the callback function from inside of `run()`.
     
 Here are all the possible options available when creating a new browser instance:
 
-- userAgent: Any string that represents a user agent.  By default it uses the one shown in the example, a windows chrome browser.
-- libraryCode: If you want to inject jquery into all your webpages, you should do something like `fs.readFileSync("jquery.js")` here.
-- cookies: as seen in later examples, you can save the cookies from a previous browser instance and use them here
-- disableImages: If you don't need images in your scraper, this can drastically reduce memory and speed up webpages.  However, your screenshots may look like crap.
+- `userAgent`: Any string that represents a user agent.  By default it uses the one shown in the example, a windows chrome browser.
+- `libraryCode`: If you want to inject jquery into all your webpages, you should do something like `fs.readFileSync("jquery.js")` here.
+- `cookies`: as seen in later examples, you can save the cookies from a previous browser instance and use them here
+- `disableImages`: If you don't need images in your scraper, this can drastically reduce memory and speed up webpages.  However, your screenshots may look like crap.
 
 ## A simple login example
 
