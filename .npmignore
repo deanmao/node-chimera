@@ -1,3 +1,4 @@
 deps
 build
 binding.gyp
+qt
