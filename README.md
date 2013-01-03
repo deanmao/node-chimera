@@ -129,6 +129,36 @@ everything that a browser may have.  If you want to remove the google analytics 
 string and remove them manually yourself.  There are many cookie parsers out there -- check out the one that is included in
 the expressjs middleware if you need something quick and dirty.
 
+## A bad example
+
+Here's a few things that you should not do.
+
+    var c = new Chimera();
+    var fs = require('fs');
+    c.perform({
+      url: "http://www.mywebsite.com",
+      locals: {
+        fs: fs
+      },
+      run: function(callback) {
+        var os = require('os');
+      },
+      callback: function(err, result) {
+        
+      }
+    });
+    
+In the above example, we try to pass the `fs` variable as a local variable.  We can't do this because `fs` cannot be 
+turned into a json string.  Just because it looks like it might work, it won't.  The sandbox in the web browser
+prevents scoped variables from being available.
+
+A second thing wrong is that the `run()` function doesn't perform the callback function with `callback()`.  If you do
+this, the context will never be passed back to the nodejs world so you'll be wondering why you can't scrape anything.
+
+The third thing wrong here is that inside the `run()` function, we're trying to call `require('os')`.  The require
+function pulls from the nodejs scoped context which isn't available inside the webpage.  You only have access to typical
+variables in a webpage like `window.document` etc.
+
 ## Compiling your own version
 
 Since this library does use native libraries, I may not have a native version for your platform (people have been asking
