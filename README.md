@@ -10,6 +10,9 @@ something that does exactly what phantomjs is capable of doing, except in a full
 Installing is simple via npm:
 
     npm install chimera
+    
+Be warned, this does take a long time.  I'm thinking that I should probably package the binaries separately and have 
+the install script detect your OS & arch and maybe download the "proper native binaries" from github or s3.
 
 ## Usage
 
@@ -63,6 +66,68 @@ Here are all the possible options available when creating a new browser instance
 - libraryCode: If you want to inject jquery into all your webpages, you should do something like `fs.readFileSync("jquery.js")` here.
 - cookies: as seen in later examples, you can save the cookies from a previous browser instance and use them here
 - disableImages: If you don't need images in your scraper, this can drastically reduce memory and speed up webpages.  However, your screenshots may look like crap.
+
+## A simple login example
+
+In the example code below, we show how to login to a website using a native mouse button click on the submit button, then load a second
+browser instance using the logged in cookies from the first browser instance.
+
+    var Chimera = require('chimera').Chimera;
+
+    var myUsername = "my_username";
+    var myPassword = "my_password";
+
+    var c = new Chimera();
+    c.perform({
+      url: "http://www.mywebsite.com",
+      locals: {
+        username: myUsername,
+        password: myPassword
+      },
+      run: function(callback) {
+        // find the form fields and press submit
+        pos = jQuery('#login-button').offset()
+        window.chimera.sendEvent("click", pos.left + 10, pos.top + 10)
+      },
+      callback: function(err, result) {
+        // capture a screen shot
+        c.capture("screenshot.png");
+
+        // save the cookies and close out the browser session
+        var cookies = c.cookies();
+        c.close();
+    
+        // Create a new browser session with cookies from the previous session
+        var c2 = new Chimera({
+          cookies: cookies
+        });
+        c2.perform({
+          url: "http://www.mywebsite.com",
+          run: function(callback) {
+            // You're logged in here!
+          },
+          callback: function(err, result) {
+            // capture a screen shot that shows we're logged in
+            c2.capture("screenshot_logged_in.png");
+            c2.close();
+          }
+        });
+      }
+    });
+    
+### A few notes
+
+In the example above, you may notice `window.chimera.sendEvent()`.  The `chimera` variable is a global inside webpages and
+allow you to call functions that you otherwise wouldn't be able to.  You can take a screenshot with `chimera.capture()` for
+example.
+
+When we are in the callback() for the first browser instance, we nab the cookies via `c.cookies()`.  If you inspect the
+cookies, you'll see that it's just a giant string containing the domain, keys, and values.  This may contain http & https
+cookies as well, which are normally not accessible via javascript from inside the webpage.  You'll also probably notice
+there are cookies from tracking companies like google analytics or mixpanel.  The cookies string will basically contain
+everything that a browser may have.  If you want to remove the google analytics cookies, you'll have to parse the cookie
+string and remove them manually yourself.  There are many cookie parsers out there -- check out the one that is included in
+the expressjs middleware if you need something quick and dirty.
 
 ## Compiling your own version
 
