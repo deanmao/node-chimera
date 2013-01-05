@@ -7,8 +7,14 @@
   "engines": {
     "node": ">= 0.6"
   },
+  "dependencies": {
+    "request": "~2.12.0"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/deanmao/node-chimera.git"
+  },
+  "scripts": {
+    "postinstall": "scripts/download_native_binary.js"
   }
 }
