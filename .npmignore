@@ -2,3 +2,4 @@ deps
 build
 binding.gyp
 qt
+native
