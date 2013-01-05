@@ -78,7 +78,7 @@ Chimera::Chimera(QObject *parent)
 
     m_jar.setParent(this);
     m_page.networkAccessManager()->setCookieJar(&m_jar);
-    
+
     m_page.settings()->setMaximumPagesInCache(3);
     m_page.settings()->setAttribute(QWebSettings::FrameFlatteningEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
@@ -194,7 +194,7 @@ void Chimera::wait()
   }
 }
 
-bool Chimera::render(const QString &fileName)
+bool Chimera::capture(const QString &fileName)
 {
     QFileInfo fileInfo(fileName);
     QDir dir;

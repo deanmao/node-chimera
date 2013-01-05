@@ -70,7 +70,7 @@ public:
     void exit(int code = 0);
 
 public slots:
-    bool render(const QString &fileName);
+    bool capture(const QString &fileName);
     void callback(const QString &errorResult, const QString &result);
     void sendEvent(const QString &type, const QVariant &arg1 = QVariant(), const QVariant &arg2 = QVariant());
 

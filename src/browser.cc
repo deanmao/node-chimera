@@ -133,7 +133,7 @@ Handle<Value> Browser::Capture(const Arguments& args) {
   Chimera* chimera = w->getChimera();
  
   if (0 != chimera) {
-    chimera->render(top_v8::ToQString(args[0]->ToString()));
+    chimera->capture(top_v8::ToQString(args[0]->ToString()));
   }
  
   return scope.Close(Undefined());
