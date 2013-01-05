@@ -11,41 +11,41 @@
       'conditions': [
         ['OS=="mac"', {
           'include_dirs': [
-            'qt/include',
-            'qt/include/QtCore',
-            'qt/include/QtGui',
-            'qt/include/QtNetwork',
-            'qt/include/QtWebkit'
+            'qt_compiled/include',
+            'qt_compiled/include/QtCore',
+            'qt_compiled/include/QtGui',
+            'qt_compiled/include/QtNetwork',
+            'qt_compiled/include/QtWebkit'
           ],
           'libraries': [
             '-framework AppKit',
-            '../qt/lib/libQtGui.a',
-            '../qt/lib/libQtCore.a',
-            '../qt/lib/libQtNetwork.a',
-            '../qt/lib/libQtWebKit.a',
-            '../qt/lib/libjscore.a',
-            '../qt/lib/libwebcore.a',
-            '../qt/lib/libQtXml.a'
+            '../qt_compiled/lib/libQtGui.a',
+            '../qt_compiled/lib/libQtCore.a',
+            '../qt_compiled/lib/libQtNetwork.a',
+            '../qt_compiled/lib/libQtWebKit.a',
+            '../qt_compiled/lib/libjscore.a',
+            '../qt_compiled/lib/libwebcore.a',
+            '../qt_compiled/lib/libQtXml.a'
           ],
         }],
         ['OS=="linux"', {
           'include_dirs': [
-            'qt/include',
-            'qt/include/QtCore',
-            'qt/include/QtGui',
-            'qt/include/QtNetwork',
-            'qt/include/QtWebKit'
+            'qt_compiled/include',
+            'qt_compiled/include/QtCore',
+            'qt_compiled/include/QtGui',
+            'qt_compiled/include/QtNetwork',
+            'qt_compiled/include/QtWebKit'
           ],
           'libraries': [
             '../deps/openssl/linux/lib/libssl.a',
             '../deps/openssl/linux/lib/libcrypto.a',
-            '../qt/lib/libQtCore.a',
-            '../qt/lib/libQtGui.a',
-            '../qt/lib/libQtXml.a',
-            '../qt/lib/libQtNetwork.a',
-            '../qt/lib/libQtWebKit.a',
-            '../qt/lib/libwebcore.a',
-            '../qt/lib/libjscore.a'
+            '../qt_compiled/lib/libQtCore.a',
+            '../qt_compiled/lib/libQtGui.a',
+            '../qt_compiled/lib/libQtXml.a',
+            '../qt_compiled/lib/libQtNetwork.a',
+            '../qt_compiled/lib/libQtWebKit.a',
+            '../qt_compiled/lib/libwebcore.a',
+            '../qt_compiled/lib/libjscore.a'
           ],
         }]
       ]
