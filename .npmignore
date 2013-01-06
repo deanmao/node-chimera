@@ -3,3 +3,4 @@ build
 binding.gyp
 qt
 native
+lib/chimera.node

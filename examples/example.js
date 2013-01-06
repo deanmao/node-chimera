@@ -1,4 +1,4 @@
-var Chimera = require('./lib/main').Chimera;
+var Chimera = require(__dirname + '/../lib/main').Chimera;
 
 var myUsername = "john02sample01";
 var myPassword = "newsample";
