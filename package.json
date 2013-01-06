@@ -2,7 +2,7 @@
   "name": "chimera",
   "author": "Dean Mao <deanmao@gmail.com>",
   "description": "chimera",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "main": "./lib/main.js",
   "engines": {
     "node": ">= 0.6"
