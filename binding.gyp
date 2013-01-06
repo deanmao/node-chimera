@@ -25,7 +25,8 @@
             '../qt_compiled/lib/libQtWebKit.a',
             '../qt_compiled/lib/libjscore.a',
             '../qt_compiled/lib/libwebcore.a',
-            '../qt_compiled/lib/libQtXml.a'
+            '../qt_compiled/lib/libQtXml.a',
+            '../openssl/libcrypto.a'
           ],
         }],
         ['OS=="linux"', {
