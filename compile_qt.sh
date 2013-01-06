@@ -13,10 +13,12 @@ QT_CFG+=' -static'
 if [[ $OSTYPE = darwin* ]]; then
     QT_CFG+=' -arch x86_64'
     QT_CFG+=' -no-dwarf2'
+    QT_CFG+=' -openssl'
 else
     QT_CFG+=' -system-freetype' # Freetype for text rendering
     QT_CFG+=' -fontconfig'      # Fontconfig for better font matching
     QT_CFG+=' -qpa'             # X11-less with QPA (aka Lighthouse)
+    QT_CFG+=' -openssl-linked'
 fi
 
 QT_CFG+=' -release'             # Build only for release (no debugging support)
@@ -71,8 +73,6 @@ QT_CFG+=' -qt-libjpeg'
 QT_CFG+=' -qt-libpng'
 QT_CFG+=' -qt-zlib'
 
-# Explicitly compile with SSL support, so build will fail if headers are missing
-QT_CFG+=' -openssl-linked'
 
 # Useless styles
 QT_CFG+=' -D QT_NO_STYLESHEET'
@@ -109,8 +109,10 @@ done
 
 # For parallelizing the bootstrapping process, e.g. qmake and friends.
 export MAKEFLAGS=-j$COMPILE_JOBS
-export OPENSSL_LIBS='-L../openssl -lssl -lcrypto'
 
+if [[ $OSTYPE != darwin* ]]; then
+  export OPENSSL_LIBS='-L../openssl -lssl -lcrypto'
+fi
 ./configure -prefix ../qt_compiled $QT_CFG 
 make -j$COMPILE_JOBS install
 
