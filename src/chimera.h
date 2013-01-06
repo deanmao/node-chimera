@@ -2,7 +2,8 @@
 #define CHIMERA_H
 
 #include <QtGui>
-#include <QtWebKit>
+#include <QtWebKit/QWebPage>
+#include <QtWebKit/QWebFrame>
 #include <QTimer>
 #include <iostream>
 #include "cookiejar.h"
