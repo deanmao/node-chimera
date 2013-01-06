@@ -165,6 +165,10 @@ Since this library does use native libraries, I may not have a native version fo
 me about arm-linux and sunos).  Hopefully I can describe how one can compile this under your platform, and perhaps we can
 move to something easier.  
 
+If you're on linux, you'll need the ssl headers, freetype, and fontconfig libraries first, so you'll have to install with a command like:
+
+    apt-get install libfreetype6-dev libfontconfig1-dev libssl-dev
+
 Since nodejs comes with it's own version of ssl, we have to make Qt also use this version of ssl or else we'll have segfaults.
 Compile the openssl included first (we have some additional flags like `-fPIC` which allow the libraries to be statically included
 later on)
