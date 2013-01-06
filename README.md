@@ -165,5 +165,22 @@ Since this library does use native libraries, I may not have a native version fo
 me about arm-linux and sunos).  Hopefully I can describe how one can compile this under your platform, and perhaps we can
 move to something easier.  
 
-I've included a full copy of the qt source, but I've yet do write the scripts necessary to compile everything.  Stay tuned,
-I'll update all of this soon.
+Since nodejs comes with it's own version of ssl, we have to make Qt also use this version of ssl or else we'll have segfaults.
+Compile the openssl included first (we have some additional flags like `-fPIC` which allow the libraries to be statically included
+later on)
+
+NOTE: all commands shown here start from the base node-chimera directory.
+
+    cd openssl
+    ./config
+    make -j4
+
+Next, we'll compile Qt so that is uses the aforementioned custom ssl libraries:
+
+    cd qt
+    ./preconfig.sh
+    
+Finally we'll make our node package, however will be using a custom linker command because we need to include all the qt static
+libraries into our node package.  node-gyp isn't customizable enough to create a linker command.
+
+    ./compile.sh
