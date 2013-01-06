@@ -10,11 +10,14 @@
   "dependencies": {
     "request": "~2.12.0"
   },
+  "devDependencies": {
+    "aws-sdk": "git://github.com/aws/aws-sdk-js.git"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/deanmao/node-chimera.git"
   },
   "scripts": {
-    "postinstall": "scripts/download_native_binary.js"
+    "postinstall": "node scripts/download_native_binary.js"
   }
 }
