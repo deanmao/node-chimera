@@ -1424,6 +1424,9 @@ else	{
 	}
 $cmll_obj=$cmll_enc	unless ($cmll_obj =~ /.o$/);
 
+# Added by Chimera
+$cflags.=" -fPIC";
+
 # "Stringify" the C flags string.  This permits it to be made part of a string
 # and works as well on command lines.
 $cflags =~ s/([\\\"])/\\\1/g;
