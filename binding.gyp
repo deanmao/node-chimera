@@ -37,8 +37,6 @@
             'qt_compiled/include/QtWebKit'
           ],
           'libraries': [
-            '../deps/openssl/linux/lib/libssl.a',
-            '../deps/openssl/linux/lib/libcrypto.a',
             '../qt_compiled/lib/libQtCore.a',
             '../qt_compiled/lib/libQtGui.a',
             '../qt_compiled/lib/libQtXml.a',
