@@ -165,25 +165,29 @@ Since this library does use native libraries, I may not have a native version fo
 me about arm-linux and sunos).  Hopefully I can describe how one can compile this under your platform, and perhaps we can
 move to something easier.  
 
-If you're on linux, you'll need the ssl headers, freetype, and fontconfig libraries first, so you'll have to install with a command like:
+### Compiling on the mac:
+
+Getting a binary on the mac is fairly easy, but it does take a long time to compile Qt.  Unlike Linux, you don't need
+the custom openssl included with chimera.  Here's the basic steps to take the mac:
+
+    ./compile_qt.sh
+    ./compile_binary.sh
+    
+The final binary should be inside of node-chimera/lib.
+
+
+### Compiling on linux:
+
+You'll need the ssl headers, freetype, and fontconfig libraries first, so you'll have to install with a command like:
 
     apt-get install libfreetype6-dev libfontconfig1-dev libssl-dev
 
 Since nodejs comes with it's own version of ssl, we have to make Qt also use this version of ssl or else we'll have segfaults.
 Compile the openssl included first (we have some additional flags like `-fPIC` which allow the libraries to be statically included
-later on)
-
-NOTE: all commands shown here start from the base node-chimera directory.
+later on).  Here are all the steps required to build chimera:
 
     ./compile_openssl.sh
-
-Next, we'll compile Qt so that it uses the aforementioned custom ssl libraries:
-
     ./compile_qt.sh
-    
-Finally we'll make our node package, however will be using a custom linker command because we need to include all the qt static
-libraries into our node package.  node-gyp isn't customizable enough to create a linker command.
-
     ./compile_binary.sh
     
 The final chimera.node binary should exist inside the node-chimera/lib directory.  If you don't see it in there, something bad
