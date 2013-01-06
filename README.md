@@ -175,19 +175,16 @@ later on)
 
 NOTE: all commands shown here start from the base node-chimera directory.
 
-    cd openssl
-    ./config
-    make -j4
+    ./compile_openssl.sh
 
 Next, we'll compile Qt so that it uses the aforementioned custom ssl libraries:
 
-    cd qt
-    ./preconfig.sh
+    ./compile_qt.sh
     
 Finally we'll make our node package, however will be using a custom linker command because we need to include all the qt static
 libraries into our node package.  node-gyp isn't customizable enough to create a linker command.
 
-    ./compile.sh
+    ./compile_binary.sh
     
 The final chimera.node binary should exist inside the node-chimera/lib directory.  If you don't see it in there, something bad
 probably happened along the way.
