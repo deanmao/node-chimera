@@ -170,8 +170,8 @@ move to something easier.
 Getting a binary on the mac is fairly easy, but it does take a long time to compile Qt.  Unlike Linux, you don't need
 the custom openssl included with chimera.  Here's the basic steps to take the mac:
 
-    ./compile_qt.sh
-    ./compile_binary.sh
+    ./scripts/compile_qt.sh
+    ./scripts/compile_binary.sh
     
 The final binary should be inside of node-chimera/lib.
 
@@ -186,9 +186,9 @@ Since nodejs comes with it's own version of ssl, we have to make Qt also use thi
 Compile the openssl included first (we have some additional flags like `-fPIC` which allow the libraries to be statically included
 later on).  Here are all the steps required to build chimera:
 
-    ./compile_openssl.sh
-    ./compile_qt.sh
-    ./compile_binary.sh
+    ./scripts/compile_openssl.sh
+    ./scripts/compile_qt.sh
+    ./scripts/compile_binary.sh
     
 The final chimera.node binary should exist inside the node-chimera/lib directory.  If you don't see it in there, something bad
 probably happened along the way.
