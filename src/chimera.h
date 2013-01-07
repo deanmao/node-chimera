@@ -6,6 +6,7 @@
 #include <QtWebKit/QWebFrame>
 #include <QTimer>
 #include <QNetworkAccessManager>
+#include <QWebHistoryItem>
 #include <QNetworkProxy>
 #include <iostream>
 #include "cookiejar.h"
@@ -18,7 +19,8 @@ public:
 public slots:
     bool shouldInterruptJavaScript();
     void sendEvent(const QString &type, const QVariant &arg1 = QVariant(), const QVariant &arg2 = QVariant());
-
+    bool go(int delta);
+    
 protected:
     void javaScriptAlert(QWebFrame *originatingFrame, const QString &msg);
     void javaScriptConsoleMessage(const QString &message, int lineNumber, const QString &sourceID);

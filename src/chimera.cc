@@ -6,6 +6,17 @@ WebPage::WebPage(QObject *parent)
     m_userAgent = QWebPage::userAgentForUrl(QUrl());
 }
 
+bool WebPage::go(int delta)
+{
+    int index = this->history()->currentItemIndex() + delta;
+    QWebHistoryItem item = this->history()->itemAt(index);
+    if (item.isValid()) {
+        this->history()->goToItem(item);
+        return true;
+    }
+    return false;
+}
+
 void WebPage::javaScriptAlert(QWebFrame *originatingFrame, const QString &msg)
 {
     Q_UNUSED(originatingFrame);
