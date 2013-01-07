@@ -5,6 +5,8 @@
 #include <QtWebKit/QWebPage>
 #include <QtWebKit/QWebFrame>
 #include <QTimer>
+#include <QNetworkAccessManager>
+#include <QNetworkProxy>
 #include <iostream>
 #include "cookiejar.h"
 
@@ -70,6 +72,8 @@ public:
     void open(const QString &address);
     void exit(int code = 0);
 
+    void setProxy(const QString &type, const QString &host, int port, const QString &username, const QString &password);
+
 public slots:
     bool capture(const QString &fileName);
     void callback(const QString &errorResult, const QString &result);
@@ -86,8 +90,8 @@ private:
     int m_returnValue;
     QMutex m_mutex;
     QWaitCondition m_loading;
-    QString m_result;
-    QString m_error;
+    QQueue<QString> m_results;
+    QQueue<QString> m_errors;
     QString m_libraryCode;
     QString m_script;
     QString m_state;

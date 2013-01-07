@@ -72,7 +72,7 @@ Chimera::Chimera(QObject *parent)
     palette.setBrush(QPalette::Base, Qt::transparent);
     m_page.setPalette(palette);
     m_page.setParent(this);
-
+    
     connect(m_page.mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), SLOT(inject()));
     connect(&m_page, SIGNAL(loadFinished(bool)), this, SLOT(finish(bool)));
 
@@ -80,6 +80,7 @@ Chimera::Chimera(QObject *parent)
     m_page.networkAccessManager()->setCookieJar(&m_jar);
 
     m_page.settings()->setMaximumPagesInCache(3);
+    m_page.settings()->setAttribute(QWebSettings::PluginsEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::FrameFlatteningEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
@@ -119,6 +120,22 @@ void Chimera::setCookies(const QString &content)
   m_jar.setCookies(content);
 }
 
+void Chimera::setProxy(const QString &type, const QString &host, int port, const QString &username, const QString &password)
+{
+  QNetworkProxy proxy;
+  if (type == "socks") {
+    proxy.setType(QNetworkProxy::Socks5Proxy);
+  } else {
+    proxy.setType(QNetworkProxy::HttpProxy);
+  }
+  proxy.setHostName(host);
+  proxy.setPort(port);
+  proxy.setUser(username);
+  proxy.setPassword(password);
+  QNetworkAccessManager* manager = m_page.networkAccessManager();
+  manager->setProxy(proxy);
+}
+
 QString Chimera::getCookies()
 {
   return m_jar.getCookies();
@@ -131,8 +148,8 @@ void Chimera::setEmbedScript(const QString &jscode)
 
 void Chimera::callback(const QString &errorResult, const QString &result)
 {
-  m_error = errorResult;
-  m_result = result;
+  m_errors.enqueue(errorResult);
+  m_results.enqueue(result);
   m_mutex.unlock();
   m_loading.wakeAll();
 }
@@ -188,8 +205,6 @@ void Chimera::wait()
   if (m_mutex.tryLock()) {
     m_mutex.unlock();
   } else {
-    m_error = "";
-    m_result = "";
     m_loading.wait(&m_mutex);
   }
 }
@@ -233,12 +248,12 @@ int Chimera::returnValue() const
 
 QString Chimera::getResult()
 {
-    return m_result;
+    return m_results.dequeue();
 }
 
 QString Chimera::getError()
 {
-    return m_error;
+    return m_errors.dequeue();
 }
 
 // void Chimera::sleep(int ms)

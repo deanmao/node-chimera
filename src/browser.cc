@@ -28,6 +28,7 @@ void Browser::Initialize(Handle<Object> target) {
   tpl->PrototypeTemplate()->Set(String::NewSymbol("capture"), FunctionTemplate::New(Capture)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("cookies"), FunctionTemplate::New(Cookies)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("setCookies"), FunctionTemplate::New(SetCookies)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("setProxy"), FunctionTemplate::New(SetProxy)->GetFunction());
 
   constructor = Persistent<Function>::New(
       tpl->GetFunction());
@@ -83,8 +84,11 @@ void AsyncAfter(uv_work_t* req) {
         }
     }
 
-    work->callback.Dispose();
-    delete work;
+    uv_queue_work(uv_default_loop(), &work->request, AsyncWork, AsyncAfter);
+
+    // TODO: we need to figure out where to dispose the callback & free up work
+    // work->callback.Dispose();
+    // delete work;
 }
 
 Handle<Value> Browser::Cookies(const Arguments& args) {
@@ -115,6 +119,25 @@ Handle<Value> Browser::SetCookies(const Arguments& args) {
 
   if (0 != chimera) {
     chimera->setCookies(top_v8::ToQString(args[0]->ToString()));
+  }
+  
+  return scope.Close(Undefined());
+}
+
+Handle<Value> Browser::SetProxy(const Arguments& args) {
+  HandleScope scope;
+
+  if (!args[0]->IsString()) {
+      return ThrowException(Exception::TypeError(
+          String::New("First argument must be the type of proxy (socks/http)")));
+  }
+
+  Browser* w = ObjectWrap::Unwrap<Browser>(args.This());
+  Chimera* chimera = w->getChimera();
+
+  if (0 != chimera) {
+    chimera->setProxy(top_v8::ToQString(args[0]->ToString()), top_v8::ToQString(args[1]->ToString()), args[2]->Int32Value(), 
+    top_v8::ToQString(args[3]->ToString()), top_v8::ToQString(args[4]->ToString()));
   }
   
   return scope.Close(Undefined());

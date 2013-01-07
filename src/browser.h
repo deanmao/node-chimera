@@ -38,6 +38,7 @@ class Browser : public node::ObjectWrap {
   static v8::Handle<v8::Value> Capture(const v8::Arguments& args);
   static v8::Handle<v8::Value> Cookies(const v8::Arguments& args);
   static v8::Handle<v8::Value> SetCookies(const v8::Arguments& args);
+  static v8::Handle<v8::Value> SetProxy(const v8::Arguments& args);
 
   Chimera* chimera_;
   QString libraryCode_;
