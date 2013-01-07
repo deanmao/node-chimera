@@ -11,8 +11,9 @@ Installing is simple via npm:
 
     npm install chimera
     
-Be warned, this does take a long time.  I'm thinking that I should probably package the binaries separately and have 
-the install script detect your OS & arch and maybe download the "proper native binaries" from github or s3.
+It will download the native chimera binary in the postinstall script.  Currently we have binaries for 64bit darwin (mac),
+and 64bit linux.  If you use something different, you may have to compile your own or wait for me to build one for your
+platform.
 
 ## Usage
 

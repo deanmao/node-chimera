@@ -128,7 +128,9 @@ cd ../../../../..
 cp -rp src/3rdparty/webkit/Source/JavaScriptCore/release/* ../qt_compiled/lib/
 cp -rp src/3rdparty/webkit/Source/WebCore/release/* ../qt_compiled/lib/
 
-rm -rf ../qt_compiled/include/QtScript
-ln -s include/QtScript ../qt_compiled/include/
-
 cat include/QtGui/QtGui | grep -v -e 'qs60' -e 'qvfbhdr' -e 'qwsembedwidget' > ../qt_compiled/include/QtGui/QtGui
+
+rm -rf ../qt_compiled/include/QtScript
+cd ../qt_compiled/include
+ln -s ../../qt/include/QtScript .
+

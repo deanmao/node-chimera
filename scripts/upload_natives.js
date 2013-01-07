@@ -24,6 +24,7 @@ function upload(filename, key) {
 try {
   upload(__dirname + '/../native/darwin_x64/chimera.node.gz', 'chimera_darwin_x64.gz');
   upload(__dirname + '/../native/linux_x64/chimera.node.gz', 'chimera_linux_x64.gz');
+  upload(__dirname + '/../native/linux_ia32/chimera.node.gz', 'chimera_linux_ia32.gz');
 } catch(e) {
   console.log(e);
 }
