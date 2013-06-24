@@ -1,8 +1,8 @@
 #!/bin/bash
 
-wget http://download.qt-project.org/official_releases/qt/5.0/5.0.2/single/qt-everywhere-opensource-src-5.0.2.tar.gz
-tar zxvf qt-everywhere-opensource-src-5.0.2.tar.gz
-cd qt5
+#wget http://download.qt-project.org/official_releases/qt/5.0/5.0.2/single/qt-everywhere-opensource-src-5.0.2.tar.gz
+#tar zxvf qt-everywhere-opensource-src-5.0.2.tar.gz
+cd qt-everywhere-opensource-src-5.0.2
 
 COMPILE_JOBS=4
 
@@ -70,5 +70,5 @@ if [[ $OSTYPE != darwin* ]]; then
   export OPENSSL_LIBS='-L../openssl -lssl -lcrypto'
 fi
 
-./configure -prefix $PWD/../qt_compiled $QT_CFG
+./configure -prefix $PWD/../qt $QT_CFG
 make -j8 install

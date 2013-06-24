@@ -11,45 +11,45 @@
       'conditions': [
         ['OS=="mac"', {
           'include_dirs': [
-            'qt_compiled/include',
-            'qt_compiled/include/QtCore',
-            'qt_compiled/include/QtGui',
-            'qt_compiled/include/QtNetwork',
-            'qt_compiled/include/QtWebkit'
+            'qt/include',
+            'qt/include/QtCore',
+            'qt/include/QtGui',
+            'qt/include/QtNetwork',
+            'qt/include/QtWebkit'
           ],
           'libraries': [
             '-framework AppKit',
-            '../qt_compiled/lib/libQtGui.so',
-            '../qt_compiled/lib/libQtCore.so',
-            '../qt_compiled/lib/libQtNetwork.so',
-            '../qt_compiled/lib/libQtWebKit.so',
-            '../qt_compiled/lib/libjscore.so',
-            '../qt_compiled/lib/libwebcore.so',
-            '../qt_compiled/lib/libQtXml.so'
+            '../qt/lib/libQtGui.so',
+            '../qt/lib/libQtCore.so',
+            '../qt/lib/libQtNetwork.so',
+            '../qt/lib/libQtWebKit.so',
+            '../qt/lib/libjscore.so',
+            '../qt/lib/libwebcore.so',
+            '../qt/lib/libQtXml.so'
           ],
         }],
         ['OS=="linux"', {
           'include_dirs': [
-            'qt_compiled/include',
-            'qt_compiled/include/QtCore',
-            'qt_compiled/include/QtGui',
-            'qt_compiled/include/QtNetwork',
-            'qt_compiled/include/QtWebKit',
-            'qt_compiled/include/QtWidgets',
-            'qt_compiled/include/QtWebKitWidgets'
+            'qt/include',
+            'qt/include/QtCore',
+            'qt/include/QtGui',
+            'qt/include/QtNetwork',
+            'qt/include/QtWebKit',
+            'qt/include/QtWidgets',
+            'qt/include/QtWebKitWidgets'
           ],
           'ldflags': [
-             '-Wl,-rpath <!@(pwd)/qt_compiled/lib'
+             '-Wl,-rpath <!@(pwd)/qt/lib'
            ],
           'libraries': [
-            '../qt_compiled/lib/libQt5Gui.so',
-            '../qt_compiled/lib/libQt5Core.so',
-            '../qt_compiled/lib/libQt5Widgets.so',
-            '../qt_compiled/lib/libQt5Network.so',
-            '../qt_compiled/lib/libQt5Xml.so',
-            '../qt_compiled/lib/libQt5Designer.so',
-            '../qt_compiled/lib/libQt5WebKit.so',
-            '../qt_compiled/lib/libQt5WebKitWidgets.so'
+            '../qt/lib/libQt5Gui.so',
+            '../qt/lib/libQt5Core.so',
+            '../qt/lib/libQt5Widgets.so',
+            '../qt/lib/libQt5Network.so',
+            '../qt/lib/libQt5Xml.so',
+            '../qt/lib/libQt5Designer.so',
+            '../qt/lib/libQt5WebKit.so',
+            '../qt/lib/libQt5WebKitWidgets.so'
           ],
         }]
       ]
