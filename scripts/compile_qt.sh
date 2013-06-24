@@ -25,8 +25,9 @@ else
     QT_CFG+=' -openssl-linked'
 fi
 
-QT_CFG+=' -nomake examples'     # Don't build any examples
-QT_CFG+=' -nomake tests'        # Don't built the tools
+QT_CFG+=' -nomake examples'
+QT_CFG+=' -nomake tests'
+QT_CFG+=' -skip qtwebkit-examples-and-demos'
 
 # Irrelevant Qt features
 QT_CFG+=' -no-cups'
@@ -75,4 +76,5 @@ if [[ $OSTYPE != darwin* ]]; then
 fi
 
 ./configure -prefix $PWD/../qt $QT_CFG
-make -j8 install
+make -j8
+make install
