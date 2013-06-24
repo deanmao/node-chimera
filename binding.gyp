@@ -1,4 +1,5 @@
 {
+  'downloader': '<!(node scripts/downloader.js)',
   'targets': [
     {
       'target_name': 'chimera',

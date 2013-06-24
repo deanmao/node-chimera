@@ -16,10 +16,7 @@ QT_CFG+=' -confirm-license'     # Silently acknowledge the license confirmation
 QT_CFG+=' -v'                   # Makes it easier to see what header dependencies are missing
 
 if [[ $OSTYPE = darwin* ]]; then
-    QT_CFG+=' -no-dwarf2'
     QT_CFG+=' -openssl'
-    QT_CFG+=' -qpa cocoa'
-    QT_CFG+=' -no-c++11'
 else
     QT_CFG+=' -fontconfig'      # Fontconfig for better font matching
     QT_CFG+=' -openssl-linked'
@@ -35,7 +32,6 @@ QT_CFG+=' -no-opengl'
 QT_CFG+=' -no-kms'
 QT_CFG+=' -no-rpath'
 QT_CFG+=' -no-dbus'
-QT_CFG+=' -reduce-relocations'
 QT_CFG+=' -no-xcb'
 QT_CFG+=' -no-eglfs'
 QT_CFG+=' -no-directfb'
