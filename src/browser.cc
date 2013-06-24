@@ -84,7 +84,7 @@ void AsyncAfter(uv_work_t* req) {
         }
     }
 
-    uv_queue_work(uv_default_loop(), &work->request, AsyncWork, AsyncAfter);
+    uv_queue_work(uv_default_loop(), &work->request, AsyncWork, (uv_after_work_cb)AsyncAfter);
 
     // TODO: we need to figure out where to dispose the callback & free up work
     // work->callback.Dispose();
@@ -223,7 +223,7 @@ Handle<Value> Browser::Open(const Arguments& args) {
     work->chimera->execute();
   }
 
-  int status = uv_queue_work(uv_default_loop(), &work->request, AsyncWork, AsyncAfter);
+  int status = uv_queue_work(uv_default_loop(), &work->request, AsyncWork, (uv_after_work_cb)AsyncAfter);
   assert(status == 0);
   
   return Undefined();

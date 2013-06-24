@@ -2,7 +2,7 @@
 #define BROWSER_H
 
 #include <node.h>
-#include <QApplication>
+#include <QtWidgets/QApplication>
 #include <QTimer>
 #include "chimera.h"
 

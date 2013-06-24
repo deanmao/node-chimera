@@ -19,13 +19,13 @@
           ],
           'libraries': [
             '-framework AppKit',
-            '../qt_compiled/lib/libQtGui.a',
-            '../qt_compiled/lib/libQtCore.a',
-            '../qt_compiled/lib/libQtNetwork.a',
-            '../qt_compiled/lib/libQtWebKit.a',
-            '../qt_compiled/lib/libjscore.a',
-            '../qt_compiled/lib/libwebcore.a',
-            '../qt_compiled/lib/libQtXml.a'
+            '../qt_compiled/lib/libQtGui.so',
+            '../qt_compiled/lib/libQtCore.so',
+            '../qt_compiled/lib/libQtNetwork.so',
+            '../qt_compiled/lib/libQtWebKit.so',
+            '../qt_compiled/lib/libjscore.so',
+            '../qt_compiled/lib/libwebcore.so',
+            '../qt_compiled/lib/libQtXml.so'
           ],
         }],
         ['OS=="linux"', {
@@ -34,16 +34,22 @@
             'qt_compiled/include/QtCore',
             'qt_compiled/include/QtGui',
             'qt_compiled/include/QtNetwork',
-            'qt_compiled/include/QtWebKit'
+            'qt_compiled/include/QtWebKit',
+            'qt_compiled/include/QtWidgets',
+            'qt_compiled/include/QtWebKitWidgets'
           ],
+          'ldflags': [
+             '-Wl,-rpath <!@(pwd)/qt_compiled/lib'
+           ],
           'libraries': [
-            '../qt_compiled/lib/libQtCore.a',
-            '../qt_compiled/lib/libQtGui.a',
-            '../qt_compiled/lib/libQtXml.a',
-            '../qt_compiled/lib/libQtNetwork.a',
-            '../qt_compiled/lib/libQtWebKit.a',
-            '../qt_compiled/lib/libwebcore.a',
-            '../qt_compiled/lib/libjscore.a'
+            '../qt_compiled/lib/libQt5Gui.so',
+            '../qt_compiled/lib/libQt5Core.so',
+            '../qt_compiled/lib/libQt5Widgets.so',
+            '../qt_compiled/lib/libQt5Network.so',
+            '../qt_compiled/lib/libQt5Xml.so',
+            '../qt_compiled/lib/libQt5Designer.so',
+            '../qt_compiled/lib/libQt5WebKit.so',
+            '../qt_compiled/lib/libQt5WebKitWidgets.so'
           ],
         }]
       ]

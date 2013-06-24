@@ -83,7 +83,7 @@ Chimera::Chimera(QObject *parent)
     palette.setBrush(QPalette::Base, Qt::transparent);
     m_page.setPalette(palette);
     m_page.setParent(this);
-    
+
     connect(m_page.mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), SLOT(inject()));
     connect(&m_page, SIGNAL(loadFinished(bool)), this, SLOT(finish(bool)));
 
@@ -95,8 +95,8 @@ Chimera::Chimera(QObject *parent)
     m_page.settings()->setAttribute(QWebSettings::FrameFlatteningEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
     m_page.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
-    m_page.settings()->setLocalStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
-    m_page.settings()->setOfflineStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
+    // m_page.settings()->setLocalStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
+    // m_page.settings()->setOfflineStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
     m_page.setViewportSize(QSize(1024, 768));
 
     // Ensure we have document.body.
@@ -225,14 +225,6 @@ bool Chimera::capture(const QString &fileName)
     QFileInfo fileInfo(fileName);
     QDir dir;
     dir.mkpath(fileInfo.absolutePath());
-
-    if (fileName.toLower().endsWith(".pdf")) {
-        QPrinter printer;
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName(fileName);
-        m_page.mainFrame()->print(&printer);
-        return true;
-    }
 
     QSize viewportSize = m_page.viewportSize();
     QSize pageSize = m_page.mainFrame()->contentsSize();
