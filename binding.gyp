@@ -1,6 +1,5 @@
 {
   'downloader': '<!(node scripts/downloader.js)',
-  'blah': 'echo "<!@(pwd)/qt/lib"',
   'targets': [
     {
       'target_name': 'chimera',
