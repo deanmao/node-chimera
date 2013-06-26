@@ -17,9 +17,9 @@ http.get(options, function(res) {
   res.on("end", function() {
     fs.writeFile(cwd+'qt.tar.gz', fileData, 'binary', function(err){
         if (err) throw err
-        console.log('finished downloading');
+        console.log('finished downloading, now extracting tar.gz file');
         spawn('tar', ['zvxf', cwd+'qt.tar.gz'], {cwd: cwd}).on('close', function() {
-          console.log('done with tar');
+          console.log('done with extraction');
         });
      });
   });
