@@ -78,6 +78,9 @@ public:
 
     void setProxy(const QString &type, const QString &host, int port, const QString &username, const QString &password);
 
+signals:
+    void unlockSignal();
+
 public slots:
     bool capture(const QString &fileName);
     void callback(const QString &errorResult, const QString &result);
@@ -86,8 +89,9 @@ public slots:
 private slots:
     void finish(bool);
     void inject();
-
+    
 private:
+    void mutexUnlock();
     QString m_loadStatus;
     WebPage m_page;
     CookieJar m_jar;

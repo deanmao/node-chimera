@@ -1,4 +1,3 @@
-#define BUILDING_NODE_EXTENSION
 #include <node.h>
 #include "browser.h"
 #include "top_v8.h"
@@ -21,7 +20,7 @@ Browser::~Browser() {
 void Browser::Initialize(Handle<Object> target) {
   Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
   tpl->SetClassName(String::NewSymbol("Browser"));
-  tpl->InstanceTemplate()->SetInternalFieldCount(1);  
+  tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
   tpl->PrototypeTemplate()->Set(String::NewSymbol("open"), FunctionTemplate::New(Open)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("close"), FunctionTemplate::New(Close)->GetFunction());
@@ -101,7 +100,7 @@ Handle<Value> Browser::Cookies(const Arguments& args) {
   if (0 != chimera) {
     cookies = chimera->getCookies();
   }
-  
+
   return scope.Close(top_v8::FromQString(cookies));
 }
 
@@ -120,7 +119,7 @@ Handle<Value> Browser::SetCookies(const Arguments& args) {
   if (0 != chimera) {
     chimera->setCookies(top_v8::ToQString(args[0]->ToString()));
   }
-  
+
   return scope.Close(Undefined());
 }
 
@@ -136,50 +135,50 @@ Handle<Value> Browser::SetProxy(const Arguments& args) {
   Chimera* chimera = w->getChimera();
 
   if (0 != chimera) {
-    chimera->setProxy(top_v8::ToQString(args[0]->ToString()), top_v8::ToQString(args[1]->ToString()), args[2]->Int32Value(), 
+    chimera->setProxy(top_v8::ToQString(args[0]->ToString()), top_v8::ToQString(args[1]->ToString()), args[2]->Int32Value(),
     top_v8::ToQString(args[3]->ToString()), top_v8::ToQString(args[4]->ToString()));
   }
-  
+
   return scope.Close(Undefined());
 }
 
 
 Handle<Value> Browser::Capture(const Arguments& args) {
   HandleScope scope;
-  
+
   if (!args[0]->IsString()) {
       return ThrowException(Exception::TypeError(
           String::New("First argument must be a filename string")));
   }
-  
+
   Browser* w = ObjectWrap::Unwrap<Browser>(args.This());
   Chimera* chimera = w->getChimera();
- 
+
   if (0 != chimera) {
     chimera->capture(top_v8::ToQString(args[0]->ToString()));
   }
- 
+
   return scope.Close(Undefined());
 }
-  
+
 Handle<Value> Browser::Close(const Arguments& args) {
   HandleScope scope;
-  
+
   Browser* w = ObjectWrap::Unwrap<Browser>(args.This());
   Chimera* chimera = w->getChimera();
- 
+
   if (0 != chimera) {
     chimera->exit(1);
     w->setChimera(0);
     chimera->deleteLater();
   }
- 
+
   return scope.Close(Undefined());
 }
 
 Handle<Value> Browser::Open(const Arguments& args) {
   HandleScope scope;
-  
+
   if (!args[1]->IsString()) {
       return ThrowException(Exception::TypeError(
           String::New("Second argument must be a javascript string")));
@@ -191,7 +190,7 @@ Handle<Value> Browser::Open(const Arguments& args) {
   }
 
   Local<Function> callback = Local<Function>::Cast(args[2]);
-  
+
   BWork* work = new BWork();
   work->error = false;
   work->request.data = work;
@@ -199,7 +198,7 @@ Handle<Value> Browser::Open(const Arguments& args) {
 
   Browser* w = ObjectWrap::Unwrap<Browser>(args.This());
   Chimera* chimera = w->getChimera();
-  
+
   if (0 != chimera) {
     work->chimera = chimera;
   } else {
@@ -214,7 +213,7 @@ Handle<Value> Browser::Open(const Arguments& args) {
   }
 
   work->chimera->setEmbedScript(top_v8::ToQString(args[1]->ToString()));
-  
+
   if (args[0]->IsString()) {
     work->url = top_v8::ToQString(args[0]->ToString());
     work->chimera->open(work->url);
@@ -225,6 +224,6 @@ Handle<Value> Browser::Open(const Arguments& args) {
 
   int status = uv_queue_work(uv_default_loop(), &work->request, AsyncWork, (uv_after_work_cb)AsyncAfter);
   assert(status == 0);
-  
+
   return Undefined();
 }

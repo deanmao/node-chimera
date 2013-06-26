@@ -127,8 +127,8 @@ int WebPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_Chimera_t {
-    QByteArrayData data[18];
-    char stringdata[142];
+    QByteArrayData data[19];
+    char stringdata[155];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -138,27 +138,28 @@ struct qt_meta_stringdata_Chimera_t {
 static const qt_meta_stringdata_Chimera_t qt_meta_stringdata_Chimera = {
     {
 QT_MOC_LITERAL(0, 0, 7),
-QT_MOC_LITERAL(1, 8, 7),
-QT_MOC_LITERAL(2, 16, 0),
-QT_MOC_LITERAL(3, 17, 8),
-QT_MOC_LITERAL(4, 26, 8),
-QT_MOC_LITERAL(5, 35, 11),
-QT_MOC_LITERAL(6, 47, 6),
-QT_MOC_LITERAL(7, 54, 9),
-QT_MOC_LITERAL(8, 64, 4),
-QT_MOC_LITERAL(9, 69, 4),
-QT_MOC_LITERAL(10, 74, 4),
-QT_MOC_LITERAL(11, 79, 6),
-QT_MOC_LITERAL(12, 86, 6),
-QT_MOC_LITERAL(13, 93, 7),
-QT_MOC_LITERAL(14, 101, 10),
-QT_MOC_LITERAL(15, 112, 5),
-QT_MOC_LITERAL(16, 118, 9),
-QT_MOC_LITERAL(17, 128, 12)
+QT_MOC_LITERAL(1, 8, 12),
+QT_MOC_LITERAL(2, 21, 0),
+QT_MOC_LITERAL(3, 22, 7),
+QT_MOC_LITERAL(4, 30, 8),
+QT_MOC_LITERAL(5, 39, 8),
+QT_MOC_LITERAL(6, 48, 11),
+QT_MOC_LITERAL(7, 60, 6),
+QT_MOC_LITERAL(8, 67, 9),
+QT_MOC_LITERAL(9, 77, 4),
+QT_MOC_LITERAL(10, 82, 4),
+QT_MOC_LITERAL(11, 87, 4),
+QT_MOC_LITERAL(12, 92, 6),
+QT_MOC_LITERAL(13, 99, 6),
+QT_MOC_LITERAL(14, 106, 7),
+QT_MOC_LITERAL(15, 114, 10),
+QT_MOC_LITERAL(16, 125, 5),
+QT_MOC_LITERAL(17, 131, 9),
+QT_MOC_LITERAL(18, 141, 12)
     },
-    "Chimera\0capture\0\0fileName\0callback\0"
-    "errorResult\0result\0sendEvent\0type\0"
-    "arg1\0arg2\0finish\0inject\0content\0"
+    "Chimera\0unlockSignal\0\0capture\0fileName\0"
+    "callback\0errorResult\0result\0sendEvent\0"
+    "type\0arg1\0arg2\0finish\0inject\0content\0"
     "loadStatus\0state\0userAgent\0viewportSize\0"
 };
 #undef QT_MOC_LITERAL
@@ -169,37 +170,43 @@ static const uint qt_meta_data_Chimera[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
-       5,   76, // properties
+       8,   14, // methods
+       5,   82, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    0,   54,    2, 0x05,
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   49,    2, 0x0a,
-       4,    2,   52,    2, 0x0a,
-       7,    3,   57,    2, 0x0a,
-       7,    2,   64,    2, 0x2a,
-       7,    1,   69,    2, 0x2a,
-      11,    1,   72,    2, 0x08,
-      12,    0,   75,    2, 0x08,
+       3,    1,   55,    2, 0x0a,
+       5,    2,   58,    2, 0x0a,
+       8,    3,   63,    2, 0x0a,
+       8,    2,   70,    2, 0x2a,
+       8,    1,   75,    2, 0x2a,
+      12,    1,   78,    2, 0x08,
+      13,    0,   81,    2, 0x08,
+
+ // signals: parameters
+    QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Bool, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    5,    6,
-    QMetaType::Void, QMetaType::QString, QMetaType::QVariant, QMetaType::QVariant,    8,    9,   10,
-    QMetaType::Void, QMetaType::QString, QMetaType::QVariant,    8,    9,
-    QMetaType::Void, QMetaType::QString,    8,
+    QMetaType::Bool, QMetaType::QString,    4,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    6,    7,
+    QMetaType::Void, QMetaType::QString, QMetaType::QVariant, QMetaType::QVariant,    9,   10,   11,
+    QMetaType::Void, QMetaType::QString, QMetaType::QVariant,    9,   10,
+    QMetaType::Void, QMetaType::QString,    9,
     QMetaType::Void, QMetaType::Bool,    2,
     QMetaType::Void,
 
  // properties: name, type, flags
-      13, QMetaType::QString, 0x00095103,
-      14, QMetaType::QString, 0x00095001,
-      15, QMetaType::QString, 0x00095103,
+      14, QMetaType::QString, 0x00095103,
+      15, QMetaType::QString, 0x00095001,
       16, QMetaType::QString, 0x00095103,
-      17, QMetaType::QVariantMap, 0x00095103,
+      17, QMetaType::QString, 0x00095103,
+      18, QMetaType::QVariantMap, 0x00095103,
 
        0        // eod
 };
@@ -209,15 +216,25 @@ void Chimera::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
     if (_c == QMetaObject::InvokeMetaMethod) {
         Chimera *_t = static_cast<Chimera *>(_o);
         switch (_id) {
-        case 0: { bool _r = _t->capture((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 0: _t->unlockSignal(); break;
+        case 1: { bool _r = _t->capture((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 1: _t->callback((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
-        case 2: _t->sendEvent((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3]))); break;
-        case 3: _t->sendEvent((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2]))); break;
-        case 4: _t->sendEvent((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 5: _t->finish((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 6: _t->inject(); break;
+        case 2: _t->callback((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 3: _t->sendEvent((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3]))); break;
+        case 4: _t->sendEvent((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2]))); break;
+        case 5: _t->sendEvent((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 6: _t->finish((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: _t->inject(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (Chimera::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Chimera::unlockSignal)) {
+                *result = 0;
+            }
         }
     }
 }
@@ -247,13 +264,13 @@ int Chimera::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 8;
     }
 #ifndef QT_NO_PROPERTIES
       else if (_c == QMetaObject::ReadProperty) {
@@ -294,5 +311,11 @@ int Chimera::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     }
 #endif // QT_NO_PROPERTIES
     return _id;
+}
+
+// SIGNAL 0
+void Chimera::unlockSignal()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
 }
 QT_END_MOC_NAMESPACE

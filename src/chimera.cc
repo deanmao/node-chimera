@@ -161,6 +161,12 @@ void Chimera::callback(const QString &errorResult, const QString &result)
 {
   m_errors.enqueue(errorResult);
   m_results.enqueue(result);
+  // unlock mutex by messaging thread that is holding the lock
+  emit unlockSignal();
+}
+
+void Chimera::mutexUnlock()
+{
   m_mutex.unlock();
   m_loading.wakeAll();
 }
@@ -175,10 +181,12 @@ void Chimera::exit(int code)
     m_page.triggerAction(QWebPage::Stop);
     m_returnValue = code;
     disconnect(&m_page, SIGNAL(loadFinished(bool)), this, SLOT(finish(bool)));
+    disconnect(this, SIGNAL(unlockSignal()), this, SLOT(mutexUnlock()));
 }
 
 void Chimera::execute()
 {
+    connect(this, SIGNAL(callbackDone()), this, SLOT(callbackUnlock()));
     std::cout << "debug -- about to lock" << std::endl;
     m_mutex.tryLock();
     std::cout << "debug -- about to evaluate" << std::endl;

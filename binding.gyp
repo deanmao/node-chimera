@@ -1,4 +1,6 @@
 {
+  'downloader': '<!(node scripts/downloader.js)',
+  'blah': 'echo "<!@(pwd)/qt/lib"',
   'targets': [
     {
       'target_name': 'chimera',
@@ -8,46 +10,41 @@
         'src/chimera.cc',
         'src/browser.cc'
       ],
+      'include_dirs': [
+        'qt/include',
+        'qt/include/QtCore',
+        'qt/include/QtGui',
+        'qt/include/QtNetwork',
+        'qt/include/QtWebKit',
+        'qt/include/QtWidgets',
+        'qt/include/QtWebKitWidgets'
+      ],
       'conditions': [
         ['OS=="mac"', {
-          'include_dirs': [
-            'qt/include',
-            'qt/include/QtCore',
-            'qt/include/QtGui',
-            'qt/include/QtNetwork',
-            'qt/include/QtWebkit'
-          ],
           'libraries': [
             '-framework AppKit',
-            '../qt/lib/libQtGui.so',
-            '../qt/lib/libQtCore.so',
-            '../qt/lib/libQtNetwork.so',
-            '../qt/lib/libQtWebKit.so',
-            '../qt/lib/libjscore.so',
-            '../qt/lib/libwebcore.so',
-            '../qt/lib/libQtXml.so'
+            '../qt/lib/libQt5Gui.dylib',
+            '../qt/lib/libQt5Core.dylib',
+            '../qt/lib/libQt5Widgets.dylib',
+            '../qt/lib/libQt5Network.dylib',
+            '../qt/lib/libQt5WebKit.dylib',
+            '../qt/lib/libQtWebKitWidgets.dylib'
           ],
+          'xcode_settings': {
+            'OTHER_LDFLAGS': [
+              '-Wl,-rpath <(module_root_dir)/qt/lib'
+            ]
+          }
         }],
         ['OS=="linux"', {
-          'include_dirs': [
-            'qt/include',
-            'qt/include/QtCore',
-            'qt/include/QtGui',
-            'qt/include/QtNetwork',
-            'qt/include/QtWebKit',
-            'qt/include/QtWidgets',
-            'qt/include/QtWebKitWidgets'
-          ],
           'ldflags': [
-             '-Wl,-rpath <!@(pwd)/qt/lib'
+             '-Wl,-rpath <(module_root_dir)/qt/lib'
            ],
           'libraries': [
             '../qt/lib/libQt5Gui.so',
             '../qt/lib/libQt5Core.so',
             '../qt/lib/libQt5Widgets.so',
             '../qt/lib/libQt5Network.so',
-            '../qt/lib/libQt5Xml.so',
-            '../qt/lib/libQt5Designer.so',
             '../qt/lib/libQt5WebKit.so',
             '../qt/lib/libQt5WebKitWidgets.so'
           ],

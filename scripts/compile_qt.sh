@@ -2,8 +2,9 @@
 
 if [ ! -f "qt-everywhere-opensource-src-5.0.2.tar.gz" ]
 then
-  wget http://download.qt-project.org/official_releases/qt/5.0/5.0.2/single/qt-everywhere-opensource-src-5.0.2.tar.gz
-  tar zxf qt-everywhere-opensource-src-5.0.2.tar.gz
+  echo 1
+  #wget http://download.qt-project.org/official_releases/qt/5.0/5.0.2/single/qt-everywhere-opensource-src-5.0.2.tar.gz
+  #tar zxf qt-everywhere-opensource-src-5.0.2.tar.gz
 fi
 
 cd qt-everywhere-opensource-src-5.0.2
@@ -11,37 +12,40 @@ cd qt-everywhere-opensource-src-5.0.2
 COMPILE_JOBS=4
 
 QT_CFG=''
-QT_CFG+=' -opensource'          # Use the open-source license
-QT_CFG+=' -confirm-license'     # Silently acknowledge the license confirmation
-QT_CFG+=' -v'                   # Makes it easier to see what header dependencies are missing
+QT_CFG+=' -opensource'
+QT_CFG+=' -confirm-license'
+QT_CFG+=' -v'
+QT_CFG+=' -release'
 
 if [[ $OSTYPE = darwin* ]]; then
-    QT_CFG+=' -no-dwarf2'
     QT_CFG+=' -openssl'
-    QT_CFG+=' -qpa cocoa'
+    QT_CFG+=' -no-framework'
     QT_CFG+=' -no-c++11'
 else
-    QT_CFG+=' -fontconfig'      # Fontconfig for better font matching
-    QT_CFG+=' -openssl-linked'
+    QT_CFG+=' -fontconfig'
+#    QT_CFG+=' -openssl-linked'
+    QT_CFG+=' -no-opengl'
 fi
 
+QT_CFG+=' -qpa minimal'
+QT_CFG+=' -qt-libjpeg'
+QT_CFG+=' -qt-libpng'
+QT_CFG+=' -qt-zlib'
+QT_CFG+=' -qt-pcre'
 QT_CFG+=' -nomake examples'
 QT_CFG+=' -nomake tests'
 QT_CFG+=' -skip qtwebkit-examples-and-demos'
 
 # Irrelevant Qt features
 QT_CFG+=' -no-cups'
-QT_CFG+=' -no-opengl'
 QT_CFG+=' -no-kms'
 QT_CFG+=' -no-rpath'
 QT_CFG+=' -no-dbus'
-QT_CFG+=' -reduce-relocations'
 QT_CFG+=' -no-xcb'
 QT_CFG+=' -no-eglfs'
 QT_CFG+=' -no-directfb'
 QT_CFG+=' -no-linuxfb'
 QT_CFG+=' -no-kms'
-QT_CFG+=' -qpa minimal'
 
 until [ -z "$1" ]; do
     case $1 in
@@ -71,10 +75,10 @@ done
 # For parallelizing the bootstrapping process, e.g. qmake and friends.
 export MAKEFLAGS=-j$COMPILE_JOBS
 
-if [[ $OSTYPE != darwin* ]]; then
-  export OPENSSL_LIBS='-L../openssl -lssl -lcrypto'
-fi
+# if [[ $OSTYPE != darwin* ]]; then
+#   export OPENSSL_LIBS='-L../openssl -lssl -lcrypto'
+# fi
 
 ./configure -prefix $PWD/../qt $QT_CFG
-make -j8
-make install
+#make -j8
+#make install
