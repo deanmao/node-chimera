@@ -1,8 +1,5 @@
 deps
 build
-binding.gyp
 qt
 qt_compiled
 openssl
-native
-lib/chimera.node
