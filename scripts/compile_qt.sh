@@ -39,7 +39,7 @@ QT_CFG+=' -skip qtwebkit-examples-and-demos'
 # Irrelevant Qt features
 QT_CFG+=' -no-cups'
 QT_CFG+=' -no-kms'
-QT_CFG+=' -no-rpath'
+QT_CFG+=' -rpath'
 QT_CFG+=' -no-dbus'
 QT_CFG+=' -no-xcb'
 QT_CFG+=' -no-eglfs'
