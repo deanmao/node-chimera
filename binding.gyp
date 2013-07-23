@@ -45,7 +45,8 @@
             '../qt/lib/libQt5Widgets.so',
             '../qt/lib/libQt5Network.so',
             '../qt/lib/libQt5WebKit.so',
-            '../qt/lib/libQt5WebKitWidgets.so'
+            '../qt/lib/libQt5WebKitWidgets.so',
+            '../qt/plugins/platforms/libqminimal.so'
           ],
         }]
       ]

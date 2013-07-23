@@ -9,7 +9,7 @@ fi
 
 cd qt-everywhere-opensource-src-5.0.2
 
-COMPILE_JOBS=4
+COMPILE_JOBS=2
 
 QT_CFG=''
 QT_CFG+=' -opensource'
@@ -80,5 +80,5 @@ export MAKEFLAGS=-j$COMPILE_JOBS
 # fi
 
 ./configure -prefix $PWD/../qt $QT_CFG
-#make -j8
-#make install
+make -j2
+make install

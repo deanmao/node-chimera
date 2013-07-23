@@ -86,6 +86,7 @@ Chimera::Chimera(QObject *parent)
 
     connect(m_page.mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), SLOT(inject()));
     connect(&m_page, SIGNAL(loadFinished(bool)), this, SLOT(finish(bool)));
+    connect(this, SIGNAL(unlockSignal()), this, SLOT(mutexUnlock()));
 
     m_jar.setParent(this);
     m_page.networkAccessManager()->setCookieJar(&m_jar);
@@ -186,12 +187,8 @@ void Chimera::exit(int code)
 
 void Chimera::execute()
 {
-    connect(this, SIGNAL(callbackDone()), this, SLOT(callbackUnlock()));
-    std::cout << "debug -- about to lock" << std::endl;
     m_mutex.tryLock();
-    std::cout << "debug -- about to evaluate" << std::endl;
     m_page.mainFrame()->evaluateJavaScript(m_script);
-    std::cout << "debug -- done evaluating" << std::endl;
 }
 
 void Chimera::finish(bool success)

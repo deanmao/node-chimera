@@ -89,9 +89,9 @@ public slots:
 private slots:
     void finish(bool);
     void inject();
+    void mutexUnlock();
     
 private:
-    void mutexUnlock();
     QString m_loadStatus;
     WebPage m_page;
     CookieJar m_jar;

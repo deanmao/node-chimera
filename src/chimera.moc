@@ -127,8 +127,8 @@ int WebPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_Chimera_t {
-    QByteArrayData data[19];
-    char stringdata[155];
+    QByteArrayData data[20];
+    char stringdata[167];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -151,16 +151,18 @@ QT_MOC_LITERAL(10, 82, 4),
 QT_MOC_LITERAL(11, 87, 4),
 QT_MOC_LITERAL(12, 92, 6),
 QT_MOC_LITERAL(13, 99, 6),
-QT_MOC_LITERAL(14, 106, 7),
-QT_MOC_LITERAL(15, 114, 10),
-QT_MOC_LITERAL(16, 125, 5),
-QT_MOC_LITERAL(17, 131, 9),
-QT_MOC_LITERAL(18, 141, 12)
+QT_MOC_LITERAL(14, 106, 11),
+QT_MOC_LITERAL(15, 118, 7),
+QT_MOC_LITERAL(16, 126, 10),
+QT_MOC_LITERAL(17, 137, 5),
+QT_MOC_LITERAL(18, 143, 9),
+QT_MOC_LITERAL(19, 153, 12)
     },
     "Chimera\0unlockSignal\0\0capture\0fileName\0"
     "callback\0errorResult\0result\0sendEvent\0"
-    "type\0arg1\0arg2\0finish\0inject\0content\0"
-    "loadStatus\0state\0userAgent\0viewportSize\0"
+    "type\0arg1\0arg2\0finish\0inject\0mutexUnlock\0"
+    "content\0loadStatus\0state\0userAgent\0"
+    "viewportSize\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -170,24 +172,25 @@ static const uint qt_meta_data_Chimera[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
-       5,   82, // properties
+       9,   14, // methods
+       5,   88, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x05,
+       1,    0,   59,    2, 0x05,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,   55,    2, 0x0a,
-       5,    2,   58,    2, 0x0a,
-       8,    3,   63,    2, 0x0a,
-       8,    2,   70,    2, 0x2a,
-       8,    1,   75,    2, 0x2a,
-      12,    1,   78,    2, 0x08,
-      13,    0,   81,    2, 0x08,
+       3,    1,   60,    2, 0x0a,
+       5,    2,   63,    2, 0x0a,
+       8,    3,   68,    2, 0x0a,
+       8,    2,   75,    2, 0x2a,
+       8,    1,   80,    2, 0x2a,
+      12,    1,   83,    2, 0x08,
+      13,    0,   86,    2, 0x08,
+      14,    0,   87,    2, 0x08,
 
  // signals: parameters
     QMetaType::Void,
@@ -200,13 +203,14 @@ static const uint qt_meta_data_Chimera[] = {
     QMetaType::Void, QMetaType::QString,    9,
     QMetaType::Void, QMetaType::Bool,    2,
     QMetaType::Void,
+    QMetaType::Void,
 
  // properties: name, type, flags
-      14, QMetaType::QString, 0x00095103,
-      15, QMetaType::QString, 0x00095001,
-      16, QMetaType::QString, 0x00095103,
+      15, QMetaType::QString, 0x00095103,
+      16, QMetaType::QString, 0x00095001,
       17, QMetaType::QString, 0x00095103,
-      18, QMetaType::QVariantMap, 0x00095103,
+      18, QMetaType::QString, 0x00095103,
+      19, QMetaType::QVariantMap, 0x00095103,
 
        0        // eod
 };
@@ -225,6 +229,7 @@ void Chimera::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 5: _t->sendEvent((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 6: _t->finish((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 7: _t->inject(); break;
+        case 8: _t->mutexUnlock(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -264,13 +269,13 @@ int Chimera::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 9;
     }
 #ifndef QT_NO_PROPERTIES
       else if (_c == QMetaObject::ReadProperty) {

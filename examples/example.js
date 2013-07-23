@@ -13,6 +13,7 @@ c.perform({
   run: function(callback) {
     try {
       var loginForm = jQuery('#login_login-main');
+      console.log('okay here');
       if (loginForm[0]) {
         console.log('found login form');
         loginForm.find('input[name=user]').val(username);
@@ -21,6 +22,7 @@ c.perform({
         console.log('clicking submit');
         chimera.sendEvent("click", pos.left + 5, pos.top + 5);
         chimera.capture("logged_out.png");
+        loginForm.submit();
       } else if (jQuery('span.userkarma')[0]) {
         console.log('we are logged in!');
         callback(null, "success!");
